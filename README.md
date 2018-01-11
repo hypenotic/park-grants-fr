@@ -1,4 +1,4 @@
-# Park People - Grants - EN
+# Park People - Grants - FR
 
 > A Vue.js project
 
