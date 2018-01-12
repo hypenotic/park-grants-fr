@@ -7,16 +7,14 @@ import VueRouter from 'vue-router'
 import { routes } from './routes'
 import Buefy from 'buefy'
 import 'buefy/lib/buefy.css'
-var SocialSharing = require('vue-social-sharing');
-import VuePaginate from 'vue-paginate'
+// import VuePaginate from 'vue-paginate'
 
 
 export const eventBus = new Vue();
 
 // Use
 Vue.use(Buefy);
-Vue.use(SocialSharing);
-Vue.use(VuePaginate)
+// Vue.use(VuePaginate)
 // Vue.use(Vuex);
 
 /* With the Vue Router imported 
@@ -35,6 +33,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
 	routes, // Have to pass an object where we setup the router. ES6 syntax (routes:routes)
   mode: 'history', // Remove the hash
+  base: '/boursesdeparc',
   scrollBehavior (to, from, savedPosition) {
       return { x: 0, y: 0 }
     }

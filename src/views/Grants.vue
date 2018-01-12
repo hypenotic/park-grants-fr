@@ -48,7 +48,7 @@
 		</div>
 	</section>
 	<section class="grant-sponsors">
-		<p>Rendu possible par une grande collaboration:</p>
+		<p>Rendu possible grâce à une formidable collaboration:</p>
 		<ul>
 			<li v-for="sponsor in data.meta_box._page_grant_sponsors">
 				<img :src="sponsor['_page_g_sponsor_img']" alt="">
@@ -59,7 +59,7 @@
 	<section class="related-resources">
 		<h3 v-html="data.meta_box._page_grant_resource_heading"></h3>
 		<div class="related-resources-copy" v-html="data.meta_box._page_grant_resource_copy"></div>
-		<div class="related-resources-copy"><strong><a href="http://parkpeople.hypenotic.com/">Browse our resource section.</a></strong></div>
+		<div class="related-resources-copy"><strong><a href="http://parkpeople.hypenotic.com/">Consultez notre section des ressources.</a></strong></div>
 		<div class="wide-container">
 			<div class="columns is-multiline">
 				<div class="column is-one-quarter" v-for="related in relatedPosts" :key="related.title.rendered">
@@ -160,9 +160,9 @@ export default {
             console.log(response.data)
 			this.data = response.data
 			axios.all([
-				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/case-study/?_embed&categories=134&per_page=4&lang=fr'),
-				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/research/?_embed&categories=134&per_page=4&lang=fr'),
-				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/resource/?_embed&categories=134&per_page=4&lang=fr')
+				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/case-study/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/research/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/resource/?_embed&categories=134&per_page=15&lang=fr')
 			])
 			.then(axios.spread((response, response1, response2) => {
 				// console.log(response.data)
@@ -199,8 +199,8 @@ h1 {
 	line-height: 1.2;
 	font-weight: 700;
 	@media #{$large-and-up} {
-		font-size: 56px;
-		line-height: 1.2;
+		font-size: 50px;
+		line-height: 1.3;
 		font-weight: 700;
 	}
 }
@@ -428,13 +428,14 @@ img {
 }
 
 .related-resources {
-	padding: 50px;
+	padding: 64px 50px;
 	padding-bottom: 220px;
 	margin-top: 50px;
 	margin-bottom: -50px;
 	h3 {
 		color: $green;
 		font-size: 40px;
+		line-height: 1.3;
 	}
 	a {
         border-bottom: 1px solid $blue;
