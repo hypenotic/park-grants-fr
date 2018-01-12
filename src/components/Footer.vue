@@ -23,7 +23,7 @@
                                 <ul class="details">
                                     <li>Téléphone: <a href="tel:+14165835776">416-583-5776</a></li>
                                     <li>Email: <a href="mailto:info@parkpeople.ca">info@parkpeople.ca</a></li>
-                                    <li>Charité #: 846449437RR0001</li>
+                                    <li># Charité: 846449437RR0001</li>
                                 </ul>
                                 <ul class="social-links">
                                     <li><a href="https://parkpeople.ca/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
@@ -64,7 +64,7 @@
                                 <ul class="details">
                                     <li>Téléphone: <a href="tel:+14165835776">416-583-5776</a></li>
                                     <li>Email: <a href="mailto:info@parkpeople.ca">info@parkpeople.ca</a></li>
-                                    <li>Charité #: 846449437RR0001</li>
+                                    <li># Charité: 846449437RR0001</li>
                                 </ul>
                                 <ul class="social-links">
                                     <li><a href="https://parkpeople.ca/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
@@ -184,7 +184,7 @@
             }
         }
     }
-gi
+
     footer >div >div >div {
         padding-top: 200px;
     }
