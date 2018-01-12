@@ -12,7 +12,8 @@
         </div>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
             <div class="navbar-end">
-                <router-link to="/" class="navbar-item" exact>Page d'accueil</router-link>
+                <a href="https://parkpeople.ca" class="navbar-item">Page d'accueil</a>
+                <router-link v-if="this.$route.path == '/faq'" to="/" class="navbar-item" exact>Bourses</router-link>
                 <router-link to="/faq" class="navbar-item" exact>FAQs</router-link>
             </div>
         </div>
