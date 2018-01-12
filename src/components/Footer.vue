@@ -47,7 +47,7 @@
                     <div class="column is-6">
                         <div class="columns is-centered">
                             <div class="column is-4">
-                                <p>Founding Sponsor</p>
+                                <p>Sponsor fondateur</p>
                                 <img src="https://parkpeople.ca/listings/custom/uploads/2017/09/TD-logo.png">
                             </div>
                         </div>
@@ -184,7 +184,7 @@
             }
         }
     }
-
+gi
     footer >div >div >div {
         padding-top: 200px;
     }
