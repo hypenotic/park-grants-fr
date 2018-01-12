@@ -6,7 +6,7 @@
                     <div class="column is-6">
                         <div class="columns is-centered">
                             <div class="column is-4">
-                                <p>Founding Sponsor</p>
+                                <p>Sponsor fondateur</p>
                                 <img src="https://parkpeople.ca/listings/custom/uploads/2017/09/TD-logo.png">
                             </div>
                         </div>
@@ -16,14 +16,14 @@
                             <div class="column is-6">
                                 <ul>
                                     <li style="color: white;font-weight: bold;">Park People</li>
-                                    <li>401 Richmond Street West</li>
-                                    <li>Studio 119, City Builder’s Lab</li>
+                                    <li>401, rue Richmond Ouest</li>
+                                    <li>Studio 119, laboratoire de City Builder</li>
                                     <li>Toronto, ON M5V 3A8</li>
                                 </ul>
                                 <ul class="details">
-                                    <li>Phone: <a href="tel:+14165835776">416-583-5776</a></li>
+                                    <li>Téléphone: <a href="tel:+14165835776">416-583-5776</a></li>
                                     <li>Email: <a href="mailto:info@parkpeople.ca">info@parkpeople.ca</a></li>
-                                    <li>Charity #: 846449437RR0001</li>
+                                    <li>Charité #: 846449437RR0001</li>
                                 </ul>
                                 <ul class="social-links">
                                     <li><a href="https://parkpeople.ca/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>

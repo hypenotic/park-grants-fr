@@ -2,7 +2,7 @@
     <nav class="navbar green">
         <div class="navbar-brand">
             <div>
-                <a><img src="https://parkpeople.ca/listings/custom/uploads/2018/01/TD_grants_white_nologos_nationalGrants_white_nologos.png" class="grants-logo"></a>
+                <a><img src="https://parkpeople.ca/listings/custom/uploads/2018/01/TD_PP_Grants_white_wordmark.png" class="grants-logo"></a>
             </div>
         </div>
         <div class="lang">
@@ -14,7 +14,7 @@
             <div class="navbar-end">
                 <a href="https://parkpeople.ca" class="navbar-item">Page d'accueil</a>
                 <router-link v-if="this.$route.path == '/faq'" to="/" class="navbar-item" exact>Bourses</router-link>
-                <router-link to="/faq" class="navbar-item" exact>FAQs</router-link>
+                <router-link v-if="this.$route.path == '/'" to="/faq" class="navbar-item" exact>Foire aux questions (FAQ)</router-link>
             </div>
         </div>
     </nav>
