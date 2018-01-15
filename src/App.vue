@@ -64,7 +64,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2.375rem;
+    font-size: 2rem;
     @media #{$large-and-up} {
         font-size: 3.375rem;
     }
@@ -75,11 +75,11 @@ h3 {
 }
 
 h4 {
-    font-size: 2.25rem;
+    font-size: 1.9rem;
 }
 
 h5 {
-    font-size: 1.833rem;
+    font-size: 1.5rem;
 }
 
 h6 {
@@ -221,6 +221,7 @@ ol.resource__bullets {
     margin-bottom: 50px;
     @media #{$medium-and-down} {
         padding: 0 24px;
+        margin-top: 100px;
     }
     p, li {
 		font-size: 1rem;

@@ -190,9 +190,15 @@
     }
     footer >div >div >div:first-child {
         background: rgb(249, 249, 249);
+        @media #{$small-and-down} {
+			text-align: center;
+		}
     }
     footer >div >div >div:last-child {
         padding: 200px 80px 80px;
+        @media #{$small-and-down} {
+			padding: 80px;
+		}
     }
 
     footer img {
