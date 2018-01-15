@@ -75,11 +75,17 @@ h3 {
 }
 
 h4 {
-    font-size: 1.9rem;
+    font-size: 2.25rem;
+    @media #{$small-and-down} {
+		font-size: 1.9rem;
+    }
 }
 
 h5 {
-    font-size: 1.5rem;
+    font-size: 1.833rem;
+    @media #{$small-and-down} {
+		font-size: 1.5rem;
+    }
 }
 
 h6 {
