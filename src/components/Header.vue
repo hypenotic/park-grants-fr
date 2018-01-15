@@ -146,6 +146,7 @@ nav#scrolling {
 }
 
 .navbar {
+    z-index: 5000;
     @media #{$small-and-down} {
         display: flex;
         align-items: center;

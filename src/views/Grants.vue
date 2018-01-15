@@ -1,6 +1,7 @@
 <template v-if="data && data.hasOwnProperty('meta_box')">
 <div>
-	<section class="section">
+	<section class="section" id="main-section">
+		<img id="pins-banner" src="https://parkpeople.ca/listings/custom/uploads/2018/01/TDPPgrants_pinsbanner.png" alt="map pins pattern">
 		<div class="container">
 			<h1 id="bird-anchor" v-html="data.meta_box._page_grant_heading"></h1>
             <div class="topContent" v-html="data.content.rendered"></div>
@@ -25,6 +26,7 @@
 			</section>
 
 			<div class="align-center"><a class="cta_button" :href="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></a></div>
+
 		</div>
 	</section>
     <section class="grant-illustration">
@@ -195,6 +197,26 @@ export default {
 	@media #{$small-and-down} {
 		padding: 24px 1.5rem !important;
 	}
+}
+
+#main-section {
+	position: relative;
+	z-index: 500;
+	background: transparent;
+	> .container {
+		position: relative;
+		z-index: 20;
+	}
+}
+
+#pins-banner {
+	display: none;
+	position: absolute;
+	top: -130px;
+	left: 0;
+	width: 150%;
+	z-index: 10;
+	opacity: 0.3;
 }
 
 .card-content {

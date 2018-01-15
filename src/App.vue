@@ -6,6 +6,11 @@
             <router-view :key="$route.fullPath"></router-view>
         </transition>
         <app-footer></app-footer>
+        <div class="credits">
+            <div class="container">
+                <p>Fait avec <i class="fa fa-heart" aria-hidden="true"></i> par <a href="https://hypenotic.com" target="_blank">Hypenotic</a>.</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -37,6 +42,25 @@ html, body {
     line-height: 26px;
     font-family: $family-cursive;
     color: $body-color;
+}
+
+.credits {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    p {
+        margin: 0;
+        font-size: 0.7rem;
+        color: $white;
+        text-align: right;
+        padding: 16px 0;
+        opacity: 0.4;
+        a {
+            color: $white;
+            // text-decoration: underline;
+            border-bottom: 1px solid $white;
+        }
+    }
 }
 
 a {
