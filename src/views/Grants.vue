@@ -6,7 +6,7 @@
 			<h1 id="bird-anchor" v-html="data.meta_box._page_grant_heading"></h1>
             <div class="topContent" v-html="data.content.rendered"></div>
 
-			<section class="application-eligibility">
+			<!-- <section class="application-eligibility">
 				<div class="application">
 					<h2>Processus de demande</h2>
 					<ol class="app-list">
@@ -23,9 +23,9 @@
 						</li>
 					</ul>
 				</div>
-			</section>
+			</section> -->
 
-			<div class="align-center"><a class="cta_button" :href="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></a></div>
+			<!-- <div class="align-center"><a class="cta_button" :href="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></a></div> -->
 
 		</div>
 	</section>
@@ -36,16 +36,16 @@
 		<div class="clouds">
 		</div>
     </section>
-	<section class="more-info">
+	<!-- <section class="more-info">
 		<div class="container">
 			<div v-html="data.meta_box._page_grant_more_info"></div>
 		</div>
-	</section>
-	<section class="second-cta">
+	</section> -->
+	<!-- <section class="second-cta">
 		<div class="container">
 			<div class="align-center"><a class="cta_button" :href="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></a></div>
 		</div>
-	</section>
+	</section> -->
 	<section class="grants-newsletter">
 		<div class="container">
 			<a class="button" href="http://parkpeople.us2.list-manage.com/subscribe?u=ba963c8c64482c0ad756245c3&id=efc9b053b8" target="_blank">Recevez notre newsletter!</a>
@@ -63,7 +63,7 @@
 			</li>
 		</ul>
 	</section>
-	<section class="related-resources" id="ressources">
+	<section class="related-resources" id="ressources" style="display: none;">
 		<h3 v-html="data.meta_box._page_grant_resource_heading"></h3>
 		<div class="related-resources-copy" v-html="data.meta_box._page_grant_resource_copy"></div>
 		<!-- <div class="related-resources-copy"><strong><a href="http://parkpeople.hypenotic.com/">Consultez notre section des ressources.</a></strong></div> -->
@@ -81,14 +81,7 @@
 								<small style="font-family: 'Dosis';font-size: 12px;"> {{ related.type | translatedType| removeHyphen | toTitleCase }}</small>
 
 								<a :href="'https://parkpeople.ca/resources/fr/'+related.type + '/' + related.id + '/' + related.slug"><h4 v-html="related.title.rendered"></h4></a>
-								<div v-html="$options.filters.readMore(related.excerpt.rendered, 100, '...')"></div>
-								<!-- <div v-if="related.pure_taxonomies.activity" class="activity-list-container">
-									<strong>Do in parks</strong>: <span v-for="tax in related.pure_taxonomies.activity" :key="tax.name">{{ tax.name  }}</span>
-								</div>
-								<div v-if="related.pure_taxonomies.learn" class="activity-list-container">
-									<strong>Know about parks:</strong> <span v-for="tax in related.pure_taxonomies.learn" :key="tax.name">{{ tax.name }}</span>
-								</div> -->
-								
+								<div v-html="$options.filters.readMore(related.excerpt.rendered, 100, '...')"></div>								
 							</div>
 						</div>
 					</div>
@@ -96,7 +89,6 @@
 			</div>
 		</div>
 	</section>
-	<!-- <div class="skewed-bg"></div> -->
 </div>
 </template>
 
@@ -431,6 +423,9 @@ img {
 	line-height: 1.3;
 	margin: 32px 0;
 	font-weight: bold;
+	@media #{$large-and-up} {
+        padding: 4px 40px;
+	}
 	@media #{$medium-and-up} {
 		padding: 16px 40px;
 		font-size: 32px;
@@ -563,7 +558,7 @@ img {
 
 .grant-illustration {
 	position: relative;
-	margin-top: -200px;
+	margin-top: -100px;
 	z-index: 100;
 	padding-bottom: 15%;
 	min-height: 300px;
