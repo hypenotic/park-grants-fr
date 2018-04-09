@@ -17,7 +17,7 @@
             <div class="navbar-end">
                 <a href="https://parkpeople.ca" class="navbar-item">Page d'accueil</a>
                 <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/faq'"><router-link to="/" exact>Bourses</router-link></span>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/faq"  exact>Foire aux questions (FAQ)</router-link></span>
+                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/faq"  exact>Récipiendaires de bourses</router-link></span>
             </div>
         </div>
     </nav>
@@ -39,7 +39,7 @@
             <div class="navbar-end">
                 <a href="https://parkpeople.ca" class="navbar-item">Page d'accueil</a>
                 <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/faq'"><router-link to="/" exact>Bourses</router-link></span>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/faq"  exact>Foire aux questions (FAQ)</router-link></span>
+                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/faq"  exact>Récipiendaires de bourses</router-link></span>
             </div>
         </div>
     </nav>
