@@ -9,7 +9,7 @@
 
 		<section class="map-section">
 			<h2>Activités TD Park People au Canada</h2>
-			<!-- <app-map></app-map> -->
+			<app-map></app-map>
 		</section>
 				
 		<section class="recipients">
@@ -98,15 +98,17 @@
 import axios from 'axios';
 import Map from '../components/Map.vue';
 import { mapState } from 'vuex'
-import NewsletterForm from '../components/NewsletterForm.vue';
+// import NewsletterForm from '../components/NewsletterForm.vue';
 export default {
 	components: {
-        appForm: NewsletterForm
+        appMap: Map
     },
 	data() {
 		return {
-			data: {},
-			relatedPosts: []
+			data: null,
+			relatedPosts: [],
+			errors: [],
+			loading: true,
 		};
 	},
 	filters: {

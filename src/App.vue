@@ -16,11 +16,16 @@
 <script>
     import Header from './components/Header.vue';
     import Footer from './components/Footer.vue';
+    import { mapState } from 'vuex';
     export default {
     components: {
         appHeader: Header,
         appFooter: Footer
-    }
+    },
+    mounted: function() {
+        this.$store.dispatch("getLocations", {'type': 'initial-load'});
+        this.$store.dispatch("getActivities", {'type': 'initial-load'});
+    },
 }
 </script>
 

@@ -459,6 +459,7 @@
 
             },
             buildMarkers(){
+                console.log('build markers');
 
                 // app.clearMarkers();
 
@@ -476,6 +477,7 @@
                     Iterate over all of the cafes
                 */
                 for( var i = 0; i < this.locations.length; i++ ){
+                    console.log(i);
                     /*
                         Set marker position
                     */
@@ -914,7 +916,7 @@
 <style lang="scss" scoped>
 
 @import '../styles/variables.scss';
-// @import '../styles/components/loader.scss';
+@import '../styles/components/loader.scss';
 @import '../styles/components/map.scss';
 
 </style>

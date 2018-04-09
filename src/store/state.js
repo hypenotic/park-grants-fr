@@ -1,6 +1,16 @@
 export const state = {
-    resourceList: [],
+    activeEvents: [],
+    activeInfoWindows: [],
+    activeMarkers: [],
+    activityList: null,
+    checkedActivityList: [],
+    filterViewState: false,
     grantsData: [],
-    singlePostCache: {},
-    language: ''
+    initialLoadCheck: true,
+    language: '',
+    listViewState: false,
+    listViewState: false,
+    locationList: null,
+    resourceList: [],
+    singlePostCache: {}
 }

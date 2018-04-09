@@ -19,14 +19,14 @@
                         <div class="activity-groups__single mb30" v-for="parent in this.$store.state.activityList" :key="parent.id">
                             <div class="activity-groups__single__header">
                                 <img :src="parent.icon" :alt="parent.name">
-                                <h6 style="color: white;" v-html="parent.name">
+                                <h6 style="color: white;" v-html="parent.french[0]">
                                 </h6>
                             </div>
                             <ul id="ck-button">
                                 <li class="map-chbx-trigger" v-for="child in parent.children" :key="child.term_id"> 
                                     <label>
 									<input type="checkbox" class="ck-box" @change="filterChange" hidden v-model="checkedCategories" :value="child.term_id" />
-									<span>{{child.name}}</span>
+									<span>{{child.french[0]}}</span>
 									</label>
                                 </li>
                             </ul>
@@ -34,9 +34,9 @@
                     </div>
                     <div class="submit-bar">
                         <div class="submit-bar-wrapper">
-                            <span id="whole-sentence-count"><span id="activities-selected" v-html="filterCount"></span> activities selected. Ready?</span>
-                            <div type="submit" class="button button--small" id="apply-search">Search!</div>
-                            <div id="clear-filters" v-bind:class="[checkedCategories.length >0 ? '' : 'hidden-clear']"><span>Clear All Activities</span></div>
+                            <span id="whole-sentence-count"><span id="activities-selected" v-html="filterCount"></span> ACTIVITÉS SÉLECTIONNÉES. PRÊT?</span>
+                            <div type="submit" class="button button--small" id="apply-search">Chercher!</div>
+                            <div id="clear-filters" v-bind:class="[checkedCategories.length >0 ? '' : 'hidden-clear']"><span>EFFACER LE FILTRE D'ACTIVITÉS</span></div>
                         </div>
                     </div>
                 </form>
