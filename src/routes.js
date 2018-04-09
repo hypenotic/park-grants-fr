@@ -13,6 +13,6 @@ export const routes = [
 	then need the component to load*/
 	{ path:'/', component: Grants, props: true },
 	{ path:'/grants', component: Grants, props: true },
-	{ path:'/faq', component: Single, props: true },
+	{ path:'/recipiendaires-de-bourses', component: Single, props: true },
 	{ path: '*', redirect: '/' }
 ]

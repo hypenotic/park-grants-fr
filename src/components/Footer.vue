@@ -1,6 +1,6 @@
 <template>
     <div>  
-        <footer v-if="this.$route.path == '/faq'">
+        <footer v-if="this.$route.path == '/recipiendaires-de-bourses'">
             <div>
                 <div class="columns">
                     <div class="column is-6">
