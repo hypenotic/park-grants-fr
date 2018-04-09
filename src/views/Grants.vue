@@ -40,12 +40,12 @@
 
 		<section class="grants-newsletter">
 			<div class="container">
-				<p>Want to stay up-to-date on Park People news?</p>
-				<a class="button" href="http://parkpeople.us2.list-manage.com/subscribe?u=ba963c8c64482c0ad756245c3&id=efc9b053b8" target="_blank">Get the Park People newsletter!</a>
+				<!-- <p>Want to stay up-to-date on Park People news?</p> -->
+				<a class="button" href="http://parkpeople.us2.list-manage.com/subscribe?u=ba963c8c64482c0ad756245c3&id=efc9b053b8" target="_blank">Recevez notre newsletter!</a>
 			</div>
 		</section>
 		<section class="grant-sponsors">
-			<p>Made possible by a great collaboration:</p>
+			<p>Rendu possible grâce à une formidable collaboration:</p>
 			<ul>
 				<li v-for="sponsor in data.meta_box._page_grant_sponsors" :key="sponsor['_page_g_sponsor_img']">
 					<img :src="sponsor['_page_g_sponsor_img']" alt="logo">
@@ -96,6 +96,7 @@
 
 <script>
 import axios from 'axios';
+import Map from '../components/Map.vue';
 import { mapState } from 'vuex'
 import NewsletterForm from '../components/NewsletterForm.vue';
 export default {
