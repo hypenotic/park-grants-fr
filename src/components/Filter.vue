@@ -6,9 +6,10 @@
         <div class="filter-bar">
             <ul>
                 <li>
-                    <p><strong style="color: white;">Filter</strong>: 
-                        <span class="info" id="filter-dropdown" if v-on:click="filterTrigger">Find park events based on the kinds of activities they do</span>
-                        <span id="copy-selected-acts"></span>
+                    <p>
+                        <strong style="color: white;">Filtrer par</strong>: 
+                        <span class="info" id="filter-dropdown" if v-on:click="filterTrigger">Type d'événement</span> 
+                        <span id="copy-selected-acts">- (<span v-html="filterCount" style="font-weight: bold;"></span> selected)</span>
                     </p>
                 </li>
             </ul>
@@ -56,7 +57,7 @@
                             </g>
                         </g>
                     </svg>
-                    <span>- Past</span>
+                    <span>- Passé</span>
                 </li>
                 <li>
                     <svg width="32px" height="40px" viewBox="0 0 32 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -68,7 +69,7 @@
                             </g>
                         </g>
                     </svg>
-                    <span>- In &lt; 30 days</span>
+                    <span>- Dans les 30 prochains jours</span>
                 </li>
                 <li>
                     <svg width="32px" height="40px" viewBox="0 0 32 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -80,7 +81,7 @@
                             </g>
                         </g>
                     </svg>
-                    <span>- In &gt; 30 days</span>
+                    <span>- Dans plus de 30 jours</span>
                 </li>    
             </ul>
         </div>      
