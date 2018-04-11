@@ -9,7 +9,7 @@
                     <p>
                         <strong style="color: white;">Filtrer par</strong>: 
                         <span class="info" id="filter-dropdown" if v-on:click="filterTrigger">Type d'événement</span> 
-                        <span id="copy-selected-acts">- (<span v-html="filterCount" style="font-weight: bold;"></span> selected)</span>
+                        <span id="copy-selected-acts">- (<span v-html="filterCount" style="font-weight: bold;"></span> sélectionné)</span>
                     </p>
                 </li>
             </ul>
@@ -46,7 +46,7 @@
 
         <div class="legend">
             <ul>
-                <li>Legend:</li>
+                <li>Légende:</li>
                 <li>                    
                     <svg width="32px" height="40px" viewBox="0 0 32 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

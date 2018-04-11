@@ -419,7 +419,7 @@
                     };
 
                     // Create a marker for each place.
-                    var markerLabel = "YOU";
+                    var markerLabel = "ICI";
                     app.markers.push(new google.maps.Marker({
                         map: app.map,
                         label: {
