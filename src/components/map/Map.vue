@@ -392,17 +392,19 @@
                         scaledSize: new google.maps.Size(25, 25)
                     };
 
+                    let here = 'https://parkpeople.ca/listings/custom/uploads/2018/04/pin_fr.svg';
+
                     // Create a marker for each place.
                     var markerLabel = "YOU";
                     app.markers.push(new google.maps.Marker({
                         map: app.map,
-                        label: {
-                            text: markerLabel,
-                            color: "#ffffff",
-                            fontSize: "10px",
-                            fontWeight: "bold"
-                        },
-                        // icon: icon,
+                        // label: {
+                        //     text: markerLabel,
+                        //     color: "#ffffff",
+                        //     fontSize: "10px",
+                        //     fontWeight: "bold"
+                        // },
+                        icon: here,
                         // title: place.name,
                         position: place.geometry.location,
                     }));
