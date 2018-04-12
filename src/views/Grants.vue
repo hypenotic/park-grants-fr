@@ -24,10 +24,9 @@
 				<div v-for="bucket in data.meta_box._page_buckets" :key="bucket.bucket_copy">
 					<h4 v-html="bucket._page_bucket_heading"></h4>
 					<p v-html="bucket._page_bucket_copy"></p>
-					<a :href="bucket._page_bucket_link">Télécharger</a>
+					<a :href="bucket._page_bucket_link" @click="downloadArea(bucket._page_bucket_heading)">Télécharger fichier .zip</a>
 				</div>
 			</div>
-
 		</section>
 
 		<section class="grant-illustration">
@@ -150,7 +149,10 @@ export default {
 
     },
 	methods: {
-
+		downloadArea(name) {
+			console.log('download event', name);
+			this.$ga.event('download', 'Bourses TD PP', name, 1);
+		}
 	},
 	mounted() {
 
