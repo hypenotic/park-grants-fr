@@ -1,7 +1,27 @@
 <template>
      <div class="single-list-item">
-        <div class="single-list-item-container">
+        <a :href="'https://parkpeople.ca/listings/events/?n='+ item.slug+ '&id='+ item.id+'&tdgrant=true'" target="_blank" class="single-list-item-container active-event" v-if="item.timeframe !== 'past'">
             <div class="single-list-item__image">
+                <img :src="item.image" :alt="item.title">
+            </div>
+
+            <div class="card-content">
+                <h5>
+                    <a :href="'https://parkpeople.ca/listings/events/?n='+ item.slug+ '&id='+ item.id+'&tdgrant=true'" target="_blank" v-html="item.title" v-if="item.timeframe !== 'past'"></a>
+                    <span v-html="item.title" v-if="item.timeframe == 'past'"></span>
+                </h5>
+                
+                <p class="single-list__group" v-if="item.listing[1] !== 'Title'"><i class="fa fa-users"></i> <span v-html="item.listing[1]"></span></p>
+    
+                <p class="single-list__date"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span v-html="item.nice_start_date"></span></p>
+    
+                <p class="single-list__time"><i class="fa fa-clock-o" aria-hidden="true"></i> <span v-html="item.start_time + ' - ' + item.end_time"></span></p>
+                
+                <p class="single-list__location"><i class="fa fa-map-marker" aria-hidden="true"></i> <span v-html="item.address"></span></p>
+            </div>
+        </a>
+        <div v-else class="single-list-item-container">
+            <div class="single-list-item__image ">
                 <img :src="item.image" :alt="item.title">
             </div>
 
@@ -50,11 +70,19 @@
         margin: 0;
         margin: 8px 0 12px;
         font-weight: bold;
+        &:hover {
+            a {
+                color: lighten($blue, 10);
+            } 
+        }
     }
 }
 
 .single-list-item-container {
-    padding: 24px;
+    display: block;
+    transition: all 0.2s ease;
+    margin: 24px;
+    border-radius: 8px;
     p {
         margin: 0;
         font-size: 14px;
@@ -63,7 +91,22 @@
     }
 }
 
+.single-list-item-container.active-event {
+    &:hover {
+        transform: scale(1.01) rotate(1deg);
+        box-shadow: 0 5px 10px rgba(10, 10, 10, 0.3), 0 0 0 1px rgba(10, 10, 10, 0.1);
+        h5 {
+            a {
+                color: lighten($blue, 10);
+            } 
+        }
+	}
+}
+
+
 .card-content {
+    border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
     background: $white;
     padding: 16px 24px;
     i {
@@ -80,6 +123,8 @@
         display: block;
         width: 100%;
         height: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
     }
 }
 
@@ -100,8 +145,5 @@
         margin-right: 12px;
     }
 }
-
-
-
 
 </style>

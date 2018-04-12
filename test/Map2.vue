@@ -5,7 +5,7 @@
             <section class="google-map" id="grants-map"></section>
             <app-map-list></app-map-list>
             <div class="loading" v-bind:class="{ 'active-loader': showLoader }">Loading&#8230;</div>
-            <input id="pac-input" class="controls wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" type="text" placeholder="Entrez votre adresse pour trouver des événements près de chez vous." style="position: absolute; top: 0; z-index: 15;">
+            <input id="pac-input" class="controls" type="text" placeholder="Entrez votre adresse pour trouver des événements près de chez vous." style="position: absolute; top: 0; z-index: 15;">
             <button id="reset-location" class="button hidden-reset-loc" style="position: absolute; z-index: 1;">Réinitialiser l'emplacement</button>
         </div>
     </div>
@@ -74,16 +74,15 @@
                 styles: [{"featureType": 'poi.park', "elementType": 'geometry',"stylers": [{"color": '#137E23'},{ "visibility": "on" }]},{"featureType":"poi.business","stylers": [{ "visibility": "off" }]},{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
             }
 
+            let input = document.getElementById('pac-input');
+            this.searchBox = new google.maps.places.SearchBox(input);
+            
             // Store 'this' in a variable, so you can referecne 'this' properly in
             // the following fucntions
             let app = this;
-
             // Listen for the event fired when the user selects a prediction and retrieve more details for that place.
-            let input = document.getElementById('pac-input');
-            app.searchBox = new google.maps.places.SearchBox(input);
-            app.searchBox.addListener('places_changed', function() {
+            this.searchBox.addListener('places_changed', function() {
                 // app.triggerSearch();
-                // console.log('places changed!');
                 app.chooseFilter();
             });
             // Listen for when the reset location button is pressed
@@ -97,29 +96,29 @@
                 app.chooseFilter();
             };
 
-            app.map = new google.maps.Map(element, options);
+            this.map = new google.maps.Map(element, options);
             
             // Add a couple map listeners for the searchbox
-            app.map.addListener('zoom_changed', function() {  
+            this.map.addListener('zoom_changed', function() {  
                 if (input.classList.contains('small-search')) {
                 } else {
                     input.classList.add('small-search');
                 }
             });
-            app.map.addListener('drag', function() {  
+            this.map.addListener('drag', function() {  
                 if (input.classList.contains('small-search')) {
                 } else {
                     input.classList.add('small-search');
                 }
             });
 
-            app.oms = new OverlappingMarkerSpiderfier(app.map, {
+            this.oms = new OverlappingMarkerSpiderfier(this.map, {
                 markersWontMove: true,
                 markersWontHide: true,
                 basicFormatEvents: true
             });
 
-            app.buildMarkers();
+            this.buildMarkers();
         },
         methods: {
             chooseFilter() {
@@ -142,27 +141,44 @@
                 } else if (value.length>0 && check.length > 0) {
                     // If both search bar and activities are full
                     console.log(2, 'yes search, yes activities');
-                    // Make sure we unhide the reset map button
-                    let reset = document.getElementById('reset-location');
-                    if (reset.classList.contains('hidden-reset-loc')) {
-                        reset.classList.remove('hidden-reset-loc');
-                    }
-                    // Apply filters
                     app.applyFilters();
                 } else if (value.length>0 && check.length == 0) {
                     // If search bar is not empty, and activities are not checked
                     console.log(3, 'yes search, no activities');
-                    // Trigger Search
+                    
+                    // app.hideOutsideRadius();
                     app.triggerSearch();
+
                 } else {
                     console.log(4, 'catch all - initial render?');
                     // Fire this in mounted()
+
                     app.resetMarkers();
                 }
+                
             },
             showAll() {
                 console.log('showAll');
                 let app = this;
+                
+                // send all locations to activeList prop in state
+                // Make sure activeList is what buildMarkers uses
+
+                // app.buildMarkers();
+
+            },
+            showAllMarkers() {
+                console.log('showAllMarkers');
+
+                let app = this;
+                let bounds = new google.maps.LatLngBounds();
+
+                for (var i=0; i< app.locations.length; i++) {
+                    bounds.extend( app.markers[i].getPosition()); 
+                    app.markers[i].setVisible(true);
+                }
+
+                app.map.fitBounds(bounds);
             },
             hideOutsideRadius(places) {
                 console.log('hideOutsideRadius');
@@ -198,10 +214,8 @@
                 console.log('applyFilters');
 
                 // Close the activity filter
-                if (this.$store.state.filterViewState == true) {
-                    this.$store.dispatch("filterViewState",this.$store.state.filterViewState );
-                }
-                
+                this.$store.dispatch("filterViewState",this.$store.state.filterViewState );
+
                 // Make sure the searchbox shrinks
                 let input = document.getElementById('pac-input');
                 if (input.classList.contains('small-search')) {
@@ -231,19 +245,25 @@
 
                 if ((value.length == 0 && check.length == 0) || (value.length==0 && check.length > 0) ) {
                     console.log('Filter Option 1');
-
+                    // app.showAllMarkers();
                     app.clearMarkers();
+
+                    // let bounds = new google.maps.LatLngBounds();
 
                     let active = [];
                     for (var i=0; i<app.locations.length; i++) {
                         // Grab the array of activity (taxonomy) IDs
                         let combined = app.locations[i].activity;
+
                         // Compare both 
                         var test = findOne(combined,nameArray);
+                        
                         // If false, event does not include at least one of the 
                         // activities in the checkedActivityList array in the store
-                        if (test !== false) {
-                            console.log('activityMatch', app.locations[i]);
+                        if (test == false) {
+                            // app.markers[i].setVisible(false);
+                        } else {
+                            // bounds.extend( app.markers[i].getPosition()); 
                             active.push(app.locations[i]);
                         }
                     }
@@ -251,8 +271,17 @@
                     console.log('activityMatch', active);
                     app.$store.dispatch("setActiveEvents", active );
 
+                    // app.rebuildMarkers();
+                    // console.log(bounds);
+                    // if (bounds.b.b != 180 ) {
+                    //     app.map.fitBounds(bounds);
+                    // } else {
+                    //     // TK ISSUE
+                    // }
+
                 } else if (value.length>0 && check.length > 0) {
                     console.log('Filter Option 2');
+                    // let bounds = new google.maps.LatLngBounds();
 
                     app.clearMarkers();
 
@@ -266,6 +295,7 @@
                     for (var i=0; i<app.locations.length; i++) {
                         // Grab the array of activity (taxonomy) IDs
                         let combined = app.locations[i].activity;
+
                         // Compare both 
                         var test = findOne(combined,nameArray);
 
@@ -319,7 +349,7 @@
 
                 app.clearMarkers();
 
-                let places = app.searchBox.getPlaces();
+                let places = this.searchBox.getPlaces();
                 
                 if (places.length == 0) {
                     return;
@@ -338,7 +368,7 @@
                     reset.classList.remove('hidden-reset-loc');
                 }
 
-                let inRange = app.hideOutsideRadius(places);
+                let inRange = this.hideOutsideRadius(places);
 
                 var bounds = new google.maps.LatLngBounds();
                 places.forEach(function(place) {
@@ -351,6 +381,8 @@
                     var placeLng = place.geometry.location.lng();
 
                     var originPlace = new google.maps.LatLng(placeLat, placeLng);
+                    // console.log(originPlace); 
+                    // console.log(placeLat, placeLng); 
                     
                     var icon = {
                         url: place.icon,
@@ -366,338 +398,55 @@
                     var markerLabel = "YOU";
                     app.markers.push(new google.maps.Marker({
                         map: app.map,
+                        // label: {
+                        //     text: markerLabel,
+                        //     color: "#ffffff",
+                        //     fontSize: "10px",
+                        //     fontWeight: "bold"
+                        // },
                         icon: here,
-                        zIndex: 1,
+                        // title: place.name,
                         position: place.geometry.location,
                     }));
+
+                    // Do we add an infoWindow so that markers and infowWindows arrays have the same amount of items?
+
+                    // let windowString = "Current Location";
+
+                    // let infoWindow = new google.maps.InfoWindow({
+                    //     content: windowString
+                    // });
+
+                    // app.infoWindows.push( infoWindow );
+
+                    if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
                 })
-
-                
-
                 app.map.fitBounds(bounds);
 
                 console.log('inRange', inRange);
                 app.$store.dispatch("setActiveEvents", inRange );
 
+                // this.rebuildMarkers();
+
             },
             buildMarkers(){
-                let app = this;
 
-                // Let's combine this method with rebuildMarkers
-                // We can set a variable to contain the right set of locations with a conditional
-                app.markers = [];
-                app.infoWindows = [];
-
-                /*
-                    Iterate over all of the events
-                */
-                for( var i = 0; i < app.locations.length; i++ ){
-                    /*
-                        Set marker position
-                    */
-                    let theposition = new google.maps.LatLng(app.locations[i].lat, app.locations[i].lng);
-
-                    /*
-                        Choose marker style based on type
-                    */
-                    if (app.locations[i].type == 'event') {
-                        
-                        let the_icon = '';
-                        if (app.locations[i].timeframe == 'morethan30') {
-                            the_icon = app.bluePin;
-                        } else if (app.locations[i].timeframe == 'within30') {
-                            the_icon = app.orangePin;
-                        } else {
-                            the_icon = app.greenPin; 
-                        }
-
-                        /*
-                            Create the marker for each of the locations and set the
-                            latitude and longitude to the latitude and longitude
-                            of the location. Also set the map to be the local map.
-                        */
-                        var marker = new google.maps.Marker({
-                            position: theposition,
-                            map: app.map,
-                            title: app.locations[i].title,
-                            icon: {
-                                url: the_icon
-                            }
-                        });
-
-                        /*
-                            Push the new marker on to the array.
-                        */
-                        app.markers.push( marker );
-
-                        /*
-                            Create the info window and add it to the local
-                            array.
-                        */
-                        let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
-
-                        let infoWindow = new google.maps.InfoWindow({
-                            content: windowString
-                        });
-
-                        app.infoWindows.push( infoWindow );
-                        
-                        /*
-                        Add the event listener to open the info window for the marker.
-                        */   
-                        google.maps.event.addListener(marker, 'spider_click', (function(marker, i) {
-                            return function() {
-                                infoWindow.setContent(windowString);
-                                infoWindow.open(app.map, marker);
-                            }
-                        })(marker, i));
-                        
-                        app.oms.addMarker(marker);
-
-                    } else {
-                        return
-                    }
-
-                }
-
-                this.map.panBy(-80, -200);
-
-            },
-            clearMarkers(){
-                console.log('clearMarkers start', this.markers, this.infoWindows);
-                let app = this;
-                /*
-                    Iterate over all of the markers and set the map
-                    to null so they disappear.
-                */
-                for( var i = 0; i < app.markers.length; i++ ){
-                    app.markers[i].setVisible(false);
-                    app.markers[i].setMap( null );
-                    
-                }
-
-                app.markers = [];
-                app.infoWindows = [];
-                console.log('clearMarkers end', app.markers, app.infoWindows);
-            },
-            checkLoader(){
-                if (this.$store.state.locationList.length > 0) {
-                    this.showLoader = false;
-                } else {
-                    this.showLoader = false;
-                }
-            },
-            infoWindowString(slug,id,title,groupName,startDate,startTime,endTime,address,timeframe) {
-                let header = '';
-                if (timeframe =='past'){
-                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ title + '</h6>';
-                } else {
-                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ slug + '&id='+ id +'&tdgrant=true" target="_blank">'+ title +'</a></h6>';
-                }
-                return '<div style="width: 250px;">' + header +'<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  groupName +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  startDate +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+startTime+' - '+endTime+'</p><span style="display:none;">'+timeframe+'</span><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-map-marker" aria-hidden="true"></i> '+address+'</p></div>';
-            },
-            rebuildMarkers(){
-                let app = this;
-                console.log('rebuild markers', app.activeMarkers);
-
-                // this.clearMarkers();
-                
-                // COMMINGTING THIS OUT MADE THE PLACES DISAPPEAR
-                // app.markers = [];
-                // app.infoWindows = [];
-
-                let bounds = new google.maps.LatLngBounds();
-
-                /*
-                    Iterate over all of the cafes
-                */
-                for( var i = 0; i < app.activeMarkers.length; i++ ){
-                    /*
-                        Set marker position
-                    */
-                    let theposition = new google.maps.LatLng(app.activeMarkers[i].lat, app.activeMarkers[i].lng);
-
-                    /*
-                        Choose marker style based on type
-                    */
-                    if (app.activeMarkers[i].type == 'event') {
-                        
-                        let the_icon = '';
-                        if (app.activeMarkers[i].timeframe == 'morethan30') {
-                            the_icon = app.bluePin;
-                        } else if (app.activeMarkers[i].timeframe == 'within30') {
-                            the_icon = app.orangePin;
-                        } else {
-                            the_icon = app.greenPin; 
-                        }
-
-                        /*
-                            Create the marker for each of the locations and set the
-                            latitude and longitude to the latitude and longitude
-                            of the location. Also set the map to be the local map.
-                        */
-                        var marker = new google.maps.Marker({
-                            position: theposition,
-                            map: app.map,
-                            title: app.activeMarkers[i].title,
-                            icon: {
-                                url: the_icon
-                            }
-                        });
-
-                        /*
-                            Push the new marker on to the array.
-                        */
-                        app.markers.push( marker );
-
-                        /*
-                            Create the info window and add it to the local
-                            array.
-                        */
-                        let windowString = app.infoWindowString(app.activeMarkers[i].slug,app.activeMarkers[i].id,app.activeMarkers[i].title,app.activeMarkers[i].listing[1],app.activeMarkers[i].nice_start_date,app.activeMarkers[i].start_time,app.activeMarkers[i].end_time,app.activeMarkers[i].address,app.activeMarkers[i].timeframe);
-
-                        let infoWindow = new google.maps.InfoWindow({
-                            content: windowString
-                        });
-
-                        app.infoWindows.push( infoWindow );
-                        
-                        /*
-                        Add the event listener to open the info window for the marker.
-                        */ 
-                        google.maps.event.addListener(marker, 'spider_click', (function(marker, i) {
-                            return function() {
-                                infoWindow.setContent(windowString);
-                                infoWindow.open(app.map, marker);
-                            }
-                        })(marker, i));
-                        
-                        bounds.extend( app.markers[i].getPosition()); 
-                        app.oms.addMarker(marker);
-
-                    } else {
-                        return
-                    }
-
-                    app.map.fitBounds(bounds);
-                }
-
-            },
-            resetMarkers(){
-                console.log('resetMarkers');
-                
-                let app = this;
-                
-                app.clearMarkers();
-                // this.markers = [];
-
-                // Let's combine this method with rebuildMarkers
-                // We can set a variable to contain the right set of locations with a conditional
-                app.markers = [];
-                app.infoWindows = [];
-
-                // let bounds = new google.maps.LatLngBounds();
-
-                /*
-                    Iterate over all of the cafes
-                */
-                for( var i = 0; i < app.locations.length; i++ ){
-                    /*
-                        Set marker position
-                    */
-                    let theposition = new google.maps.LatLng(app.locations[i].lat, app.locations[i].lng);
-
-                    /*
-                        Choose marker style based on type
-                    */
-                    if (app.locations[i].type == 'event') {
-                        
-                        let the_icon = '';
-                        if (app.locations[i].timeframe == 'morethan30') {
-                            the_icon = app.bluePin;
-                        } else if (app.locations[i].timeframe == 'within30') {
-                            the_icon = app.orangePin;
-                        } else {
-                            the_icon = app.greenPin; 
-                        }
-
-                        /*
-                            Create the marker for each of the locations and set the
-                            latitude and longitude to the latitude and longitude
-                            of the location. Also set the map to be the local map.
-                        */
-                        var marker = new google.maps.Marker({
-                            position: theposition,
-                            map: app.map,
-                            title: app.locations[i].title,
-                            icon: {
-                                url: the_icon
-                            }
-                        });
-
-                        /*
-                            Push the new marker on to the array.
-                        */
-                        app.markers.push( marker );
-
-                        /*
-                            Create the info window and add it to the local
-                            array.
-                        */
-                        let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
-
-                        let infoWindow = new google.maps.InfoWindow({
-                            content: windowString
-                        });
-
-                        app.infoWindows.push( infoWindow );
-                        
-                        /*
-                        Add the event listener to open the info window for the marker.
-                        */   
-                        google.maps.event.addListener(marker, 'spider_click', (function(marker, i) {
-                            console.log('hey');
-                            return function() {
-                                infoWindow.setContent(windowString);
-                                infoWindow.open(app.map, marker);
-                            }
-                        })(marker, i));
-                        // let theMap = this.map;
-                        // let infoWindow = new google.maps.InfoWindow();
-                        // this.oms.addListener('click', function(marker, event, i) {
-                        //     infoWindow.setContent('hey');
-                        //     infoWindow.open(theMap, marker);
-                        // });
-                        // bounds.extend( app.markers[i].getPosition()); 
-                        app.oms.addMarker(marker);
-
-                    } else {
-                        return
-                    }
-
-                }
-                
-                /*
-                    Bring map back to original position
-                */ 
-                // Make a latlng from original co-ords
-                let LatLng = new google.maps.LatLng(43.52385109999999,-79.71254299999998);
-                // Position the map accordingly
-                app.map.panTo(LatLng);
-                app.map.setZoom(4);
-                app.map.panBy(-80, -120);
-
-                let empty = [];
-                app.$store.dispatch("setActiveEvents", empty );
-                
-            },
-            setMarkers(type){
                 // app.clearMarkers();
 
                 // Let's combine this method with rebuildMarkers
                 // We can set a variable to contain the right set of locations with a conditional
                 this.markers = [];
                 this.infoWindows = [];
+
+                // Icons
+                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
 
                 /*
                     Iterate over all of the cafes
@@ -715,11 +464,11 @@
                         
                         let the_icon = '';
                         if (this.locations[i].timeframe == 'morethan30') {
-                            the_icon = app.bluePin;
+                            the_icon = blueMarker;
                         } else if (this.locations[i].timeframe == 'within30') {
-                            the_icon = app.orangePin;
+                            the_icon = orangeMarker;
                         } else {
-                            the_icon = app.greenPin; 
+                            the_icon = greenMarker; 
                         }
 
                         /*
@@ -742,11 +491,428 @@
                         this.markers.push( marker );
 
                         /*
+                            Create the group string
+                        */
+                        // let groupString ='';
+                        // if (locations[i].listing[1] != undefined) {
+                        //     groupString = '<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p>';
+                        // } else {
+                        //     groupString = '';
+                        // }
+
+                        let windowString = '';
+
+                        if (this.locations[i].timeframe == 'past') {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.locations[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                        } else {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                        }
+
+                        /*
                             Create the info window and add it to the local
                             array.
                         */
-                        let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
+                        let infoWindow = new google.maps.InfoWindow({
+                            content: windowString
+                        });
 
+                        this.infoWindows.push( infoWindow );
+                        
+                        /*
+                        Add the event listener to open the info window for the marker.
+                        */ 
+                        // marker.addListener('click', function() {
+                        //     // infoWindow.close();
+                        //     // if (infoWindow) { infoWindow.close();}
+                        //     infoWindow.open(this.map, this);
+                        // });
+                        //Allow each marker to have an info window    
+                        google.maps.event.addListener(marker, 'spider_click', (function(marker, i) {
+                            return function() {
+                                infoWindow.setContent(windowString);
+                                infoWindow.open(this.map, marker);
+                            }
+                        })(marker, i));
+                        // let theMap = this.map;
+                        // let infoWindow = new google.maps.InfoWindow();
+                        // this.oms.addListener('click', function(marker, event, i) {
+                        //     infoWindow.setContent('hey');
+                        //     infoWindow.open(theMap, marker);
+                        // });
+                        
+                        this.oms.addMarker(marker);
+
+                        // var windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="'+ 'eLink' +'">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].start_date +'</p><p style="margin:0;font-size:12px;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p></div>';
+
+                        // windowArray.push(windowString);
+                        // this.windows.push(windowArray);
+                        
+                        // var infoWindow = new google.maps.InfoWindow(), marker, i;
+                    } else {
+                        return
+                    }
+
+                }
+
+                this.map.panBy(-80, -200);
+
+            },
+            clearMarkers(){
+                console.log('clearMarkers start', this.markers, this.infoWindows);
+                let app = this;
+                /*
+                    Iterate over all of the markers and set the map
+                    to null so they disappear.
+                */
+                for( var i = 0; i < app.markers.length; i++ ){
+                    app.markers[i].setMap( null );
+                    app.markers[i].setVisible(false);
+                }
+
+                app.markers = [];
+                app.infoWindows = [];
+                console.log('clearMarkers end', app.markers, app.infoWindows);
+            },
+            checkLoader(){
+                if (this.$store.state.locationList.length > 0) {
+                    this.showLoader = false;
+                } else {
+                    this.showLoader = false;
+                }
+            },
+            rebuildMarkers(){
+                console.log('rebuild markers');
+                
+                this.markers = [];
+                this.infoWindows = [];
+
+                let app = this;
+
+                // Icons
+                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
+
+                let bounds = new google.maps.LatLngBounds();
+
+                /*
+                    Iterate over all of the cafes
+                */
+                for( var i = 0; i < app.activeMarkers.length; i++ ){
+                    /*
+                        Set marker position
+                    */
+                    let theposition = new google.maps.LatLng(app.activeMarkers[i].lat, app.activeMarkers[i].lng);
+
+                    /*
+                        Choose marker style based on type
+                    */
+                    if (app.activeMarkers[i].type == 'event') {
+
+                        // console.log(this.locations[i]);
+                        
+                        let the_icon = '';
+                        if (app.activeMarkers[i].timeframe == 'morethan30') {
+                            the_icon = blueMarker;
+                        } else if (app.activeMarkers[i].timeframe == 'within30') {
+                            the_icon = orangeMarker;
+                        } else {
+                            the_icon = greenMarker; 
+                        }
+
+                        /*
+                            Create the marker for each of the locations and set the
+                            latitude and longitude to the latitude and longitude
+                            of the location. Also set the map to be the local map.
+                        */
+                        var marker = new google.maps.Marker({
+                            position: theposition,
+                            map: app.map,
+                            title: app.activeMarkers[i].title,
+                            icon: {
+                                url: the_icon
+                            }
+                        });
+
+                        /*
+                            Push the new marker on to the array.
+                        */
+                        app.markers.push( marker );
+
+                        /*
+                            Create the group string
+                        */
+                        // let groupString ='';
+                        // if (locations[i].listing[1] != undefined) {
+                        //     groupString = '<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p>';
+                        // } else {
+                        //     groupString = '';
+                        // }
+
+                         let windowString = '';
+
+                        if (this.activeMarkers[i].timeframe == 'past') {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.activeMarkers[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.activeMarkers[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.activeMarkers[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.activeMarkers[i].start_time+' - '+this.activeMarkers[i].end_time+'</p><span style="display:none;">'+this.activeMarkers[i].timeframe+'</span></div>';
+                        } else {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.activeMarkers[i].slug+ '&id='+ this.activeMarkers[i].id +'&tdgrant=true" target="_blank">'+ this.activeMarkers[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.activeMarkers[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.activeMarkers[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.activeMarkers[i].start_time+' - '+this.activeMarkers[i].end_time+'</p><span style="display:none;">'+this.activeMarkers[i].timeframe+'</span></div>';
+                        }
+
+                        /*
+                            Create the info window and add it to the local
+                            array.
+                        */
+                        let infoWindow = new google.maps.InfoWindow({
+                            content: windowString
+                        });
+
+                        app.infoWindows.push( infoWindow );
+                        
+                        /*
+                        Add the event listener to open the info window for the marker.
+                        */ 
+                        // marker.addListener('click', function() {
+                        //     // infoWindow.close();
+                        //     // if (infoWindow) { infoWindow.close();}
+                        //     infoWindow.open(app.map, this);
+                        // });
+                        // Allow each marker to have an info window    
+                        google.maps.event.addListener(marker, 'spider_click', (function(marker, i) {
+                            return function() {
+                                infoWindow.setContent(windowString);
+                                infoWindow.open(this.map, marker);
+                            }
+                        })(marker, i));
+                        // let theMap = this.map;
+                        // let infoWindow = new google.maps.InfoWindow();
+                        // this.oms.addListener('click', function(marker, event, i) {
+                        //     infoWindow.setContent('hey');
+                        //     infoWindow.open(theMap, marker);
+                        // });
+                        
+                        bounds.extend( app.markers[i].getPosition()); 
+                        app.oms.addMarker(marker);
+
+                        // windowArray.push(windowString);
+                        // this.windows.push(windowArray);
+                        
+                        // var infoWindow = new google.maps.InfoWindow(), marker, i;
+                    } else {
+                        return
+                    }
+
+                    app.map.fitBounds(bounds);
+                }
+
+            },
+            resetMarkers(){
+                console.log('resetMarkers');
+                
+                let app = this;
+                
+                app.clearMarkers();
+
+                // Let's combine this method with rebuildMarkers
+                // We can set a variable to contain the right set of locations with a conditional
+                this.markers = [];
+                this.infoWindows = [];
+
+                // Icons
+                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
+
+                // let bounds = new google.maps.LatLngBounds();
+
+                /*
+                    Iterate over all of the cafes
+                */
+                for( var i = 0; i < this.locations.length; i++ ){
+                    /*
+                        Set marker position
+                    */
+                    let theposition = new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng);
+
+                    /*
+                        Choose marker style based on type
+                    */
+                    if (this.locations[i].type == 'event') {
+
+                        // console.log(this.locations[i]);
+                        
+                        let the_icon = '';
+                        if (this.locations[i].timeframe == 'morethan30') {
+                            the_icon = blueMarker;
+                        } else if (this.locations[i].timeframe == 'within30') {
+                            the_icon = orangeMarker;
+                        } else {
+                            the_icon = greenMarker; 
+                        }
+
+                        /*
+                            Create the marker for each of the locations and set the
+                            latitude and longitude to the latitude and longitude
+                            of the location. Also set the map to be the local map.
+                        */
+                        var marker = new google.maps.Marker({
+                            position: theposition,
+                            map: this.map,
+                            title: this.locations[i].title,
+                            icon: {
+                                url: the_icon
+                            }
+                        });
+
+                        /*
+                            Push the new marker on to the array.
+                        */
+                        this.markers.push( marker );
+
+                        /*
+                            Create the group string
+                        */
+                        // let groupString ='';
+                        // if (locations[i].listing[1] != undefined) {
+                        //     groupString = '<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p>';
+                        // } else {
+                        //     groupString = '';
+                        // }
+
+                        let windowString = '';
+
+                        if (this.locations[i].timeframe == 'past') {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.locations[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                        } else {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                        }
+
+                        /*
+                            Create the info window and add it to the local
+                            array.
+                        */
+                        let infoWindow = new google.maps.InfoWindow({
+                            content: windowString
+                        });
+
+                        this.infoWindows.push( infoWindow );
+                        
+                        /*
+                        Add the event listener to open the info window for the marker.
+                        */ 
+                        marker.addListener('click', function() {
+                            // infoWindow.close();
+                            // if (infoWindow) { infoWindow.close();}
+                            infoWindow.open(this.map, this);
+                        });
+                        //Allow each marker to have an info window    
+                        // google.maps.event.addListener(marker, 'spider_click', (function(marker, i) {
+                        //     console.log('hey');
+                        //     return function() {
+                        //         infoWindow.setContent(windowString);
+                        //         infoWindow.open(this.map, marker);
+                        //     }
+                        // })(marker, i));
+                        // let theMap = this.map;
+                        // let infoWindow = new google.maps.InfoWindow();
+                        // this.oms.addListener('click', function(marker, event, i) {
+                        //     infoWindow.setContent('hey');
+                        //     infoWindow.open(theMap, marker);
+                        // });
+                        // bounds.extend( app.markers[i].getPosition()); 
+                        this.oms.addMarker(marker);
+
+                    } else {
+                        return
+                    }
+
+                }
+                
+                /*
+                    Bring map back to original position
+                */ 
+                // Makea a latlng from original co-ords
+                let LatLng = new google.maps.LatLng(43.52385109999999,-79.71254299999998);
+                // Position the map accordingly
+                this.map.panTo(LatLng);
+                this.map.setZoom(4);
+                this.map.panBy(-80, -120);
+            },
+            setMarkers(type){
+                // app.clearMarkers();
+
+                // Let's combine this method with rebuildMarkers
+                // We can set a variable to contain the right set of locations with a conditional
+                this.markers = [];
+                this.infoWindows = [];
+
+                // Icons
+                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
+
+                /*
+                    Iterate over all of the cafes
+                */
+                for( var i = 0; i < this.locations.length; i++ ){
+                    /*
+                        Set marker position
+                    */
+                    let theposition = new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng);
+
+                    /*
+                        Choose marker style based on type
+                    */
+                    if (this.locations[i].type == 'event') {
+                        
+                        let the_icon = '';
+                        if (this.locations[i].timeframe == 'morethan30') {
+                            the_icon = blueMarker;
+                        } else if (this.locations[i].timeframe == 'within30') {
+                            the_icon = orangeMarker;
+                        } else {
+                            the_icon = greenMarker; 
+                        }
+
+                        /*
+                            Create the marker for each of the locations and set the
+                            latitude and longitude to the latitude and longitude
+                            of the location. Also set the map to be the local map.
+                        */
+                        var marker = new google.maps.Marker({
+                            position: theposition,
+                            map: this.map,
+                            title: this.locations[i].title,
+                            icon: {
+                                url: the_icon
+                            }
+                        });
+
+                        /*
+                            Push the new marker on to the array.
+                        */
+                        this.markers.push( marker );
+
+                        /*
+                            Create the group string
+                        */
+                        // let groupString ='';
+                        // if (locations[i].listing[1] != undefined) {
+                        //     groupString = '<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p>';
+                        // } else {
+                        //     groupString = '';
+                        // }
+
+                        let windowString = '';
+
+                        if (this.locations[i].timeframe == 'past') {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.locations[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                        } else {
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                        }
+
+                        /*
+                            Create the info window and add it to the local
+                            array.
+                        */
                         let infoWindow = new google.maps.InfoWindow({
                             content: windowString
                         });
@@ -778,6 +944,8 @@
                         
                         this.oms.addMarker(marker);
 
+                        // var windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="'+ 'eLink' +'">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].start_date +'</p><p style="margin:0;font-size:12px;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p></div>';
+
                         // windowArray.push(windowString);
                         // this.windows.push(windowArray);
                         
@@ -795,14 +963,22 @@
         computed: {
             locations(){
                 return this.$store.getters.allLocations;
+                // return this.$store.getters.allActiveEvents;
             },
             activeMarkers(){
+                // return this.$store.getters.activeMarkers;
                 return this.$store.getters.allActiveEvents;
+                // if (this.$store.getters.allActiveEvents.length > 0) {
+                //     return this.$store.getters.allActiveEvents;
+                // } else {
+                //     return this.$store.getters.allLocations;
+                // }
             },
             activeInfoWindows(){
                 return this.$store.getters.activeInfoWindows;
             },
             activeEvents(){
+                // console.log(this.$store.state.activeEvents[0]);
                 if (this.$store.state.activeEvents[0] == 'init') {
                     console.log('activeEvents = initial load');
                     return this.$store.state.allLocations;
@@ -811,6 +987,7 @@
                     return this.$store.state.activeEvents;
                 } else {
                     console.log('activeEvents is empty');
+                    // return this.$store.state.activeEvents;
                     return this.$store.state.allLocations;
                 }
             }
@@ -824,7 +1001,6 @@
             locations(){
                 // this.clearMarkers();
                 this.buildMarkers();
-                // this.resetMarkers();
                 // this.checkLoader();
             },
             activeMarkers(){

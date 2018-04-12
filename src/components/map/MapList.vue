@@ -77,10 +77,11 @@
         flex-wrap: wrap;
         // justify-content: space-between;
         > div {
-            width: 47%;
-            width: 24%;
+            // width: 47%;
+            width: 24.5%;
         }
 	}
 }
+
 
 </style>
