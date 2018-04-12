@@ -6,7 +6,7 @@
             <app-map-list></app-map-list>
             <div class="loading" v-bind:class="{ 'active-loader': showLoader }">Loading&#8230;</div>
             <input id="pac-input" class="controls" type="text" placeholder="Entrez votre adresse pour trouver des événements près de chez vous." style="position: absolute; top: 0; z-index: 15;">
-            <button id="reset-location" class="button hidden-reset-loc" style="position: absolute; z-index: 1;">Reset Location</button>
+            <button id="reset-location" class="button hidden-reset-loc" style="position: absolute; z-index: 1;">Réinitialiser l'emplacement</button>
         </div>
     </div>
 </template>
