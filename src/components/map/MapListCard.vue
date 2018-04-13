@@ -1,17 +1,17 @@
 <template>
      <div class="single-list-item">
-        <a :href="'https://parkpeople.ca/listings/events/?n='+ item.slug+ '&id='+ item.id+'&tdgrant=true'" target="_blank" class="single-list-item-container active-event" v-if="item.timeframe !== 'past'">
+        <div class="single-list-item-container active-event" v-if="item.timeframe !== 'past'">
             <div class="single-list-item__image">
                 <img :src="item.image" :alt="item.title">
             </div>
 
             <div class="card-content">
                 <h5>
-                    <a :href="'https://parkpeople.ca/listings/events/?n='+ item.slug+ '&id='+ item.id+'&tdgrant=true'" target="_blank" v-html="item.title" v-if="item.timeframe !== 'past'"></a>
+                    <a :href="'https://parkpeople.ca/listings/evenements/?lang=fr&n='+ item.slug+ '&id='+ item.id+'&tdgrant=true'" target="_blank" v-html="item.title" v-if="item.timeframe !== 'past'"></a>
                     <span v-html="item.title" v-if="item.timeframe == 'past'"></span>
                 </h5>
                 
-                <p class="single-list__group" v-if="item.listing[1] !== 'Title'"><i class="fa fa-users"></i> <span v-html="item.listing[1]"></span></p>
+                <p class="single-list__group" v-if="item.listing[1] !== 'Title'"><i class="fa fa-users"></i> <a :href="'https://parkpeople.ca/listings/groupes/?n='+item.listing[2]+'&id='+item.listing[0]+'&tdgrant=true'" target="_blank"><span v-html="item.listing[1]"></span></a></p>
     
                 <p class="single-list__date"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span v-html="item.nice_start_date"></span></p>
     
@@ -19,7 +19,7 @@
                 
                 <p class="single-list__location"><i class="fa fa-map-marker" aria-hidden="true"></i> <span v-html="item.address"></span></p>
             </div>
-        </a>
+        </div>
         <div v-else class="single-list-item-container">
             <div class="single-list-item__image ">
                 <img :src="item.image" :alt="item.title">
@@ -27,11 +27,11 @@
 
             <div class="card-content">
                 <h5>
-                    <a :href="'https://parkpeople.ca/listings/events/?n='+ item.slug+ '&id='+ item.id+'&tdgrant=true'" target="_blank" v-html="item.title" v-if="item.timeframe !== 'past'"></a>
+                    <a :href="'https://parkpeople.ca/listings/evenements/?lang=fr&n='+ item.slug+ '&id='+ item.id+'&tdgrant=true'" target="_blank" v-html="item.title" v-if="item.timeframe !== 'past'"></a>
                     <span v-html="item.title" v-if="item.timeframe == 'past'"></span>
                 </h5>
                 
-                <p class="single-list__group" v-if="item.listing[1] !== 'Title'"><i class="fa fa-users"></i> <span v-html="item.listing[1]"></span></p>
+                <p class="single-list__group" v-if="item.listing[1] !== 'Title'"><i class="fa fa-users"></i> <a :href="'https://parkpeople.ca/listings/groupes/?n='+item.listing[2]+'&id='+item.listing[0]+'&tdgrant=true'" target="_blank"><span v-html="item.listing[1]"></span></a></p>
     
                 <p class="single-list__date"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span v-html="item.nice_start_date"></span></p>
     
@@ -72,8 +72,13 @@
         font-weight: bold;
         &:hover {
             a {
-                color: lighten($blue, 10);
+                color: darken($blue, 10);
             } 
+        }
+    }
+    a {
+        &:hover {
+            color: darken($blue, 10);
         }
     }
 }
@@ -95,11 +100,11 @@
     &:hover {
         transform: scale(1.01) rotate(1deg);
         box-shadow: 0 5px 10px rgba(10, 10, 10, 0.3), 0 0 0 1px rgba(10, 10, 10, 0.1);
-        h5 {
-            a {
-                color: lighten($blue, 10);
-            } 
-        }
+        // h5 {
+        //     a {
+        //         color: lighten($blue, 10);
+        //     } 
+        // }
 	}
 }
 
@@ -137,6 +142,7 @@
 .single-list__location {
     i {
         margin-right: 15px;
+        font-size: 18px;
     }
 }
 
@@ -145,5 +151,6 @@
         margin-right: 12px;
     }
 }
+
 
 </style>
