@@ -434,7 +434,7 @@
                             Create the info window and add it to the local
                             array.
                         */
-                       console.log(app.locations[i].listing);
+                        console.log(app.locations[i].listing);
                         let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].listing[2],app.locations[i].listing[0],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
 
                         let infoWindow = new google.maps.InfoWindow({
@@ -645,7 +645,7 @@
                             Create the info window and add it to the local
                             array.
                         */
-                        let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].listing[1],app.locations[i].listing[2],app.locations[i].listing[0],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
+                        let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].listing[2],app.locations[i].listing[0],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
 
                         let infoWindow = new google.maps.InfoWindow({
                             content: windowString
