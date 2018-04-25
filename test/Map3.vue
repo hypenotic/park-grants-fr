@@ -12,7 +12,7 @@
 </template>
 
 <script>
-     import Filter from './Filter.vue';
+    import Filter from './Filter.vue';
     import MapList from './MapList.vue';
     export default {
         components: {
@@ -52,8 +52,7 @@
                 showList: false,
                 bluePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg',
                 orangePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg',
-                greenPin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg',
-                morePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/fr_more_pin.svg',
+                greenPin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg'
             }
         },
         mounted() {
@@ -117,7 +116,7 @@
             app.oms = new OverlappingMarkerSpiderfier(app.map, {
                 markersWontMove: true,
                 markersWontHide: true,
-                // basicFormatEvents: true
+                basicFormatEvents: true
             });
 
             app.buildMarkers();
@@ -371,17 +370,9 @@
                         zIndex: 1,
                         position: place.geometry.location,
                     }));
-
-                    // var markerLabel = "YOU";
-                    // var marker = new google.maps.Marker({
-                    //     map: app.map,
-                    //     icon: here,
-                    //     zIndex: 1,
-                    //     position: place.geometry.location,
-                    // });
-                    // app.markers.push(marker);
-                    // app.oms.addMarker(marker);
                 })
+
+                
 
                 app.map.fitBounds(bounds);
 
@@ -425,15 +416,12 @@
                             latitude and longitude to the latitude and longitude
                             of the location. Also set the map to be the local map.
                         */
-                        
-                        let iconSize = new google.maps.Size(42, 40);
-                        let marker = new google.maps.Marker({
+                        var marker = new google.maps.Marker({
                             position: theposition,
                             map: app.map,
                             title: app.locations[i].title,
                             icon: {
-                                url: the_icon,  
-                                scaledSize: iconSize
+                                url: the_icon
                             }
                         });
 
@@ -446,7 +434,7 @@
                             Create the info window and add it to the local
                             array.
                         */
-                        // console.log(app.locations[i].listing);
+                        console.log(app.locations[i].listing);
                         let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].listing[2],app.locations[i].listing[0],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
 
                         let infoWindow = new google.maps.InfoWindow({
@@ -472,17 +460,6 @@
                     }
 
                 }
-
-                // app.oms.addListener('format', function(marker, status) {
-                //     var iconURL = status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED ? app.bluePin :
-                //         status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE ? app.morePin :
-                //         status == OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIABLE ? app.orangePin :
-                //         app.greenPin;
-                //     marker.setIcon({
-                //         url: iconURL,
-                //         scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
-                //     });
-                // });
 
                 this.map.panBy(-80, -200);
 
@@ -516,13 +493,13 @@
                 if (timeframe =='past'){
                     header = '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ title + '</h6>';
                 } else {
-                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ slug + '&id='+ id +'&tdgrant=true" target="_blank">'+ title +'</a></h6>';
+                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/evenements/?lang=fr&n='+ slug + '&id='+ id +'&tdgrant=true" target="_blank">'+ title +'</a></h6>';
                 }
-                return '<div style="width: 250px;">' + header +'<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> <a href="https://parkpeople.ca/listings/groups/?n='+groupSlug+'&id='+groupID+'&tdgrant=true" target="_blank" style="font-weight: bold;">'+groupName+'</a></p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  startDate +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+startTime+' - '+endTime+'</p><span style="display:none;">'+timeframe+'</span><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-map-marker" aria-hidden="true"></i> '+address+'</p></div>';
+                return '<div style="width: 250px;">' + header +'<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> <a href="https://parkpeople.ca/listings/groupes/?lang=fr&n='+groupSlug+'&id='+groupID+'&tdgrant=true" target="_blank" style="font-weight: bold;">'+groupName+'</a></p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  startDate +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+startTime+' - '+endTime+'</p><span style="display:none;">'+timeframe+'</span><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-map-marker" aria-hidden="true"></i> '+address+'</p></div>';
             },
             rebuildMarkers(){
                 let app = this;
-                console.log('rebuild markers', app.activeMarkers)
+                console.log('rebuild markers', app.activeMarkers);
 
                 // this.clearMarkers();
                 
@@ -533,10 +510,9 @@
                 let bounds = new google.maps.LatLngBounds();
 
                 /*
-                    Iterate over all of the events
+                    Iterate over all of the cafes
                 */
                 for( var i = 0; i < app.activeMarkers.length; i++ ){
-                    console.log((i+1)+' - ', app.activeMarkers[i].id);
                     /*
                         Set marker position
                     */
@@ -561,56 +537,14 @@
                             latitude and longitude to the latitude and longitude
                             of the location. Also set the map to be the local map.
                         */
-                        var iconSize = new google.maps.Size(45, 42);
                         var marker = new google.maps.Marker({
                             position: theposition,
                             map: app.map,
                             title: app.activeMarkers[i].title,
-                            // title: app.activeMarkers[i].title,
-                            // icon: {
-                            //     url: the_icon,
-                            //     scaledSize: iconSize
-                            // },
-                            flag: app.activeMarkers[i].timeframe
-                        });
-
-                        // let the_icon = '';
-                        // let flag = '';
-                        // if (app.activeMarkers[i].timeframe == 'morethan30') {
-                        //     the_icon = app.bluePin;
-                        //     flag = 'morethan30';
-                        // } else if (app.activeMarkers[i].timeframe == 'within30') {
-                        //     the_icon = app.orangePin;
-                        //     flag = 'within30';
-                        // } else {
-                        //     the_icon = app.greenPin; 
-                        //     flag = 'past';
-                        // }
-
-                        let iconSize = new google.maps.Size(45, 42);
-                        let iconURL = '';
-                        let special = app.morePin;
-                        google.maps.event.addListener(marker, 'spider_format', function(status) {
-                            console.log('single_marker:', marker);
-                            if (status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE) {
-                                iconSize = new google.maps.Size(100, 100);
-                                iconURL = special;
-                                // iconURL = the_icon;
-                                // iconSize = new google.maps.Size(45, 42);
-                            } else {
-                                iconSize = new google.maps.Size(45, 42);
-                                iconURL = the_icon;
+                            icon: {
+                                url: the_icon
                             }
-                            console.log('status:', status, '- '+marker.title);
-                            marker.setIcon({
-                                url: iconURL,
-                                scaledSize: iconSize
-                            });
                         });
-
-                        console.log('markers',app.markers);
-
-                        // I think only one pin is showing up because there is no count for markers [i]
 
                         /*
                             Push the new marker on to the array.
@@ -635,7 +569,7 @@
                         google.maps.event.addListener(marker, 'spider_click', (function(marker, i) {
                             return function() {
                                 infoWindow.setContent(windowString);
-                                infoWindow.open(app.map, marker); 
+                                infoWindow.open(app.map, marker);
                             }
                         })(marker, i));
                         
@@ -645,29 +579,6 @@
                     } else {
                         return
                     }
-
-                    let iconURL = '';
-                    let iconSize = '';
-                    app.oms.addListener('format', function(marker, status) {
-                        // console.log(marker);
-                        if (status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE) {
-                            iconSize = new google.maps.Size(100, 100);
-                            iconURL = app.morePin;
-                        } else {
-                            if (marker.flag == 'morethan30') {
-                                iconURL = app.bluePin;
-                            } else if (marker.flag == 'within30') {
-                                iconURL = app.orangePin;
-                            } else {
-                                iconURL = app.greenPin; 
-                            }
-                            iconSize = new google.maps.Size(45, 42);
-                        }
-                        marker.setIcon({
-                            url: iconURL,
-                            scaledSize: iconSize  // makes SVG icons work in IE
-                        });
-                    });
 
                     app.map.fitBounds(bounds);
                 }
@@ -716,14 +627,12 @@
                             latitude and longitude to the latitude and longitude
                             of the location. Also set the map to be the local map.
                         */
-                        var iconSize = new google.maps.Size(45, 42);
                         var marker = new google.maps.Marker({
                             position: theposition,
                             map: app.map,
-                            title: app.locations[i].timeframe,
+                            title: app.locations[i].title,
                             icon: {
-                                url: the_icon,
-                                scaledSize: iconSize
+                                url: the_icon
                             }
                         });
 
@@ -736,7 +645,6 @@
                             Create the info window and add it to the local
                             array.
                         */
-                        // console.log(app.locations[i].listing);
                         let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title,app.locations[i].listing[1],app.locations[i].listing[2],app.locations[i].listing[0],app.locations[i].nice_start_date,app.locations[i].start_time,app.locations[i].end_time,app.locations[i].address,app.locations[i].timeframe);
 
                         let infoWindow = new google.maps.InfoWindow({
@@ -767,21 +675,6 @@
                     } else {
                         return
                     }
-
-                    // app.oms.addListener('format', function(marker, status) {
-                    //     var iconURL = status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED ? app.bluePin :
-                    //         status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE ? app.morePin :
-                    //         status == OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIABLE ? app.orangePin :
-                    //         app.greenPin;
-                    //     marker.setIcon({
-                    //         url: iconURL,
-                    //         scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
-                    //     });
-                    // });
-
-                    let iconURL ='';
-                    let iconSize = '';
-                    app.oms.clearListeners('format');
 
                 }
                 
@@ -835,14 +728,12 @@
                             latitude and longitude to the latitude and longitude
                             of the location. Also set the map to be the local map.
                         */
-                         var iconSize = new google.maps.Size(35, 32);
                         var marker = new google.maps.Marker({
                             position: theposition,
                             map: this.map,
                             title: this.locations[i].title,
                             icon: {
-                                url: the_icon,
-                                scaledSize: iconSize
+                                url: the_icon
                             }
                         });
 
