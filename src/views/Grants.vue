@@ -48,7 +48,7 @@
 	</section>
 	<section class="grants-newsletter">
 		<div class="container">
-			<a class="button" href="http://parkpeople.us2.list-manage.com/subscribe?u=ba963c8c64482c0ad756245c3&id=efc9b053b8" target="_blank">Recevez notre newsletter!</a>
+			<a class="button" href="https://parkpeople.ca/inscrivez" target="_blank">Recevez notre newsletter!</a>
 			<!-- <div>
 				<app-form skin="grants" button="Okay!"></app-form>
 			</div> -->
@@ -57,7 +57,7 @@
 	<section class="grant-sponsors">
 		<p>Rendu possible grâce à une formidable collaboration:</p>
 		<ul>
-			<li v-for="sponsor in data.meta_box._page_grant_sponsors">
+			<li v-for="(sponsor, index) in data.meta_box._page_grant_sponsors" :key="'sponsor-'+index">
 				<img :src="sponsor['_page_g_sponsor_img']" alt="">
 				<!-- <span v-html="point['_page_eligibility_copy']"></span> -->
 			</li>
