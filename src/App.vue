@@ -25,7 +25,6 @@
 </script>
 
 <style lang="scss">
-
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 @import url('https://fonts.googleapis.com/css?family=Dosis:400,700,800|Comfortaa|Merriweather');
@@ -37,10 +36,14 @@ $family-sanserif: "Dosis", sans-serif;
 $serif: "Merriweather", serif;
 
 html, body {
-    font-size: 18px;
-    line-height: 26px;
+    font-size: 16px;
+    line-height: 1.5;
     font-family: $family-cursive;
     color: $body-color;
+    @media #{$medium-and-up} {
+		font-size: 18px;
+        line-height: 26px;
+    }
 }
 
 .credits {
@@ -87,7 +90,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     @media #{$large-and-up} {
         font-size: 3.375rem;
     }
@@ -97,10 +100,27 @@ h3 {
     font-size: 2.75rem;
 }
 
+.FAQ-content {
+    h2 {
+        font-size: 2rem;
+        color: $orange;
+    }
+    h3 {
+        font-size: 1.3rem;
+    }
+    ol {
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+    }
+    a, a span {
+        color: $blue !important;
+    }
+}
+
 h4 {
     font-size: 2.25rem;
     @media #{$small-and-down} {
-		font-size: 1.9rem;
+		font-size: 1.3rem;
     }
 }
 
@@ -140,6 +160,7 @@ small {
     p {
 		font-size: 0.8rem;
 		line-height: 1.3rem;
+        margin-bottom: 0.8rem;
 	}
 }
 
@@ -219,10 +240,17 @@ ol.resource__bullets {
 
 .topContent {
     margin: 32px 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    @media #{$medium-and-up} {
+		 font-size: 1.2rem;
+    }
     p {
-        font-size: 1.2rem;
-        line-height: 1.5;
+        font-size: 1rem;
+        line-height: 1.6;
+        @media #{$medium-and-up} {
+		 font-size: 1.2rem;
+         line-height: 1.5;
+        }
     }
     a {
         border-bottom: 1px solid $blue;
@@ -250,8 +278,13 @@ ol.resource__bullets {
     margin-bottom: 50px;
     @media #{$medium-and-down} {
         padding: 0 24px;
-        margin-top: 100px;
     }
+    @media #{$medium-and-up} {
+		margin-top: 150px;
+	}
+    @media #{$large-and-up} {
+		margin-top: 50px;
+	}
     p, li {
 		font-size: 1rem;
         line-height: 1.5;
@@ -265,15 +298,18 @@ ol.resource__bullets {
     }
     h4 {
         // margin-bottom: 8px;
-        font-weight: bold;
         line-height: 1.5;
     }
     h4 strong {
         color: $orange !important;
     }
     h5 {
+        font-size: 1.2rem;
         font-weight: bold;
         line-height: 1.5;
+        @media #{$medium-and-up} {
+            font-size: 1.3rem;
+        }
     }
     ul {
         margin-left: 48px;
@@ -329,19 +365,8 @@ ol.resource__bullets {
     }
 }
 
-// Footer
-footer {
-    font-size: 0.8rem;
-    p, ul, li {
-        font-size: 0.8rem;
-    }
-}
 
 .FAQ-content {
-	h2 {
-		font-size: 1.3rem;
-		line-height: 1.5;
-	}
     p + h2 {
         margin-top: 40px !important;
     }
@@ -359,5 +384,13 @@ footer {
 
 		}
 	}
+}
+
+// Footer
+footer {
+    font-size: 0.8rem;
+    p, ul, li {
+        font-size: 0.8rem;
+    }
 }
 </style>
