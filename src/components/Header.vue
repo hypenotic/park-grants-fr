@@ -217,9 +217,9 @@ nav#scrolling {
     margin-top: 3px;
     margin-left: 8px; 
     @media #{$large-and-up} {
-		max-height: 70px;
+		max-height: 65px;
         width: auto;
-        margin-top: 3px;
+        margin-top: 8px;
         margin-left: 8px; 
 	}
     @media #{$xlarge-and-up} {
