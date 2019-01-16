@@ -58,7 +58,9 @@
 		<p>Rendu possible grâce à une formidable collaboration:</p>
 		<ul>
 			<li v-for="(sponsor, index) in data.meta_box._page_grant_sponsors" :key="'sponsor-'+index">
-				<img :src="sponsor['_page_g_sponsor_img']" alt="">
+				<a :href="sponsor['_page_g_sponsor_link']" target="_blank"><img :src="sponsor['_page_g_sponsor_img']" alt="logo"></a>
+				<!-- <img :src="sponsor['_page_g_sponsor_img']" alt="">
+				 -->
 				<!-- <span v-html="point['_page_eligibility_copy']"></span> -->
 			</li>
 		</ul>
