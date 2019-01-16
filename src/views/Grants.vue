@@ -349,7 +349,7 @@ img {
         display: flex;
 		justify-content: space-between;
 		>div {
-			width: 45%;
+			width: 48%;
 			// margin: 0 1%;
 			h2 {
 				font-size: 1.2rem;
