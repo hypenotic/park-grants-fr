@@ -4,11 +4,9 @@
             <div>
                 <div class="columns">
                     <div class="column is-6">
-                        <div class="columns is-centered">
-                            <div class="column is-4">
-                                <p>Sponsor fondateur</p>
-                                <img src="https://parkpeople.ca/listings/custom/uploads/2017/09/TD-logo.png">
-                            </div>
+                        <div class=" is-centered">
+                            <p style="text-align: center;">Sponsor fondateur</p>
+                            <img src="https://parkpeople.ca/listings/custom/uploads/2018/04/td_shield_logo_fr.png">
                         </div>
                     </div>
                     <div class="column is-6" style="background-color: green; color: white;">
@@ -45,11 +43,9 @@
             <div>
                 <div class="columns">
                     <div class="column is-6">
-                        <div class="columns is-centered">
-                            <div class="column is-4">
-                                <p>Sponsor fondateur</p>
-                                <img src="https://parkpeople.ca/listings/custom/uploads/2017/09/TD-logo.png">
-                            </div>
+                        <div class=" is-centered">
+                            <p style="text-align: center;">Sponsor fondateur</p>
+                            <img src="https://parkpeople.ca/listings/custom/uploads/2018/04/td_shield_logo_fr.png">
                         </div>
                     </div>
                     <div class="column is-6" style="background-color: green; color: white;">
@@ -202,9 +198,11 @@
     }
 
     footer img {
-        max-width: 150px;
+        max-width: 400px;
         height: auto;
         padding-top: 0px;
+        margin: 0 auto;
+        display: block;
     }
 
     .social-links {
