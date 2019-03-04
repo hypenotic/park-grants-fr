@@ -6,7 +6,7 @@
 			<h1 id="bird-anchor" v-html="data.meta_box._page_grant_heading"></h1>
             <div class="topContent" v-html="data.content.rendered"></div>
 
-			<section class="application-eligibility">
+			<!-- <section class="application-eligibility">
 				<div class="application">
 					<h2>Processus de demande</h2>
 					<ol class="app-list">
@@ -25,7 +25,7 @@
 				</div>
 			</section>
 
-			<div class="align-center"><a class="cta_button" :href="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></a></div>
+			<div class="align-center"><a class="cta_button" :href="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></a></div> -->
 
 		</div>
 	</section>
@@ -41,11 +41,11 @@
 			<div v-html="data.meta_box._page_grant_more_info"></div>
 		</div>
 	</section>
-	<section class="second-cta">
+	<!-- <section class="second-cta">
 		<div class="container">
 			<div class="align-center"><a class="cta_button" :href="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></a></div>
 		</div>
-	</section>
+	</section> -->
 	<section class="grants-newsletter">
 		<div class="container">
 			<a class="button" href="https://parkpeople.ca/inscrivez" target="_blank">Recevez notre newsletter!</a>
