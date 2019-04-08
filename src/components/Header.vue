@@ -2,7 +2,7 @@
     <nav v-if="scrolled == true" id="scrolling" class="navbar green">
         <div class="navbar-brand">
             <div>
-                <a href="https://parkpeople.ca/boursesdeparc"><img src="https://parkpeople.ca/listings/custom/uploads/2018/01/ParkPeople_french_TD_grants_CoBranding_assets_2_white-text-no-logos.png" class="grants-logo"></a>
+                <a href="https://parkpeople.ca/boursesdeparc"><img src="https://parkpeople.ca/listings/custom/uploads/2019/04/TD_logo_french_-white_nologos.png" class="grants-logo"></a>
             </div>
         </div>
         <div class="lang">
@@ -24,7 +24,7 @@
     <nav v-else class="navbar green">
         <div class="navbar-brand">
             <div>
-                <a href="https://parkpeople.ca/boursesdeparc"><img src="https://parkpeople.ca/listings/custom/uploads/2018/01/ParkPeople_french_TD_grants_CoBranding_assets_2_white-text-no-logos.png" class="grants-logo"></a>
+                <a href="https://parkpeople.ca/boursesdeparc"><img src="https://parkpeople.ca/listings/custom/uploads/2019/04/TD_logo_french_-white_nologos.png" class="grants-logo"></a>
             </div>
         </div>
         <div class="lang">
@@ -217,13 +217,14 @@ nav#scrolling {
     margin-top: 3px;
     margin-left: 8px; 
     @media #{$large-and-up} {
-		max-height: 70px;
+		max-height: 50px;
         width: auto;
-        margin-top: 3px;
-        margin-left: 8px; 
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 10px; 
 	}
     @media #{$xlarge-and-up} {
-		max-height: 80px;
+		max-height: 70px;
         width: auto;
         margin-top: 3px;
         margin-left: 8px; 
