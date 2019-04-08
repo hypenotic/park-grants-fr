@@ -20,7 +20,7 @@
 
 		<section class="event-templates">
 			<h3 v-html="data.meta_box._page_buckets_main_heading"></h3>
-			<div class="three-column wow fadeInUp">
+			<div class="four-column wow fadeInUp">
 				<div v-for="bucket in data.meta_box._page_buckets" :key="bucket.bucket_copy">
 					<h4 v-html="bucket._page_bucket_heading"></h4>
 					<p v-html="bucket._page_bucket_copy"></p>
@@ -159,7 +159,7 @@ export default {
 	},
 	created() {
 		// console.log(store.state.count)
-		axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/pages/1829?_embed')
+		axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/pages/4108?_embed')
 		.then(response => {
             console.log(response.data)
 			this.data = response.data
