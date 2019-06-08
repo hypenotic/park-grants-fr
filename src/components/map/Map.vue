@@ -4,7 +4,7 @@
         <div class="map-container" v-bind:class="{ 'list-open': this.$store.state.listViewState }">
             <section class="google-map" id="grants-map"></section>
             <app-map-list></app-map-list>
-            <div class="loading" v-bind:class="{ 'active-loader': showLoader }">Loading&#8230;</div>
+            <div class="loading" v-bind:class="{ 'active-loader': showLoader }">En cours de chargement&#8230;</div>
             <input id="pac-input" class="controls wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" type="text" placeholder="Entrez votre adresse pour trouver des événements près de chez vous." style="position: absolute; top: 0; z-index: 15;">
             <button id="reset-location" class="button hidden-reset-loc" style="position: absolute; z-index: 1;">Réinitialiser l'emplacement</button>
         </div>
@@ -50,10 +50,10 @@
                 posts: [],
                 showLoader: false,
                 showList: false,
-                bluePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg',
-                orangePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg',
-                greenPin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg',
-                morePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/fr_more_pin.svg',
+                bluePin: 'https://parkpeople.ca/custom/uploads/2018/04/blue_marker_svg.svg',
+                orangePin: 'https://parkpeople.ca/custom/uploads/2018/04/orange_marker_svg.svg',
+                greenPin: 'https://parkpeople.ca/custom/uploads/2018/04/green_marker_small.svg',
+                morePin: 'https://parkpeople.ca/custom/uploads/2018/04/fr_more_pin.svg',
             }
         },
         mounted() {
@@ -361,7 +361,7 @@
                         scaledSize: new google.maps.Size(25, 25)
                     };
 
-                    let here = 'https://parkpeople.ca/listings/custom/uploads/2018/04/pin_fr.svg';
+                    let here = 'https://parkpeople.ca/custom/uploads/2018/04/pin_fr.svg';
 
                     // Create a marker for each place.
                     var markerLabel = "YOU";
@@ -516,9 +516,9 @@
                 if (timeframe =='past'){
                     header = '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ title + '</h6>';
                 } else {
-                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ slug + '&id='+ id +'&tdgrant=true" target="_blank">'+ title +'</a></h6>';
+                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/events/?n='+ slug + '&id='+ id +'&tdgrant=true" target="_blank">'+ title +'</a></h6>';
                 }
-                return '<div style="width: 250px;">' + header +'<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> <a href="https://parkpeople.ca/listings/groups/?n='+groupSlug+'&id='+groupID+'&tdgrant=true" target="_blank" style="font-weight: bold;">'+groupName+'</a></p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  startDate +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+startTime+' - '+endTime+'</p><span style="display:none;">'+timeframe+'</span><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-map-marker" aria-hidden="true"></i> '+address+'</p></div>';
+                return '<div style="width: 250px;">' + header +'<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> <a href="https://parkpeople.ca/groups/?n='+groupSlug+'&id='+groupID+'&tdgrant=true" target="_blank" style="font-weight: bold;">'+groupName+'</a></p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  startDate +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+startTime+' - '+endTime+'</p><span style="display:none;">'+timeframe+'</span><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-map-marker" aria-hidden="true"></i> '+address+'</p></div>';
             },
             rebuildMarkers(){
                 let app = this;
