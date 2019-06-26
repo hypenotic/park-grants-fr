@@ -33,7 +33,7 @@
     
                             </div>
                             <div class="column is-6">
-                                <a class="button" href="https://parkpeople.ca/donate-now" target="_blank">Faire un don</a>
+                                <a class="button" href="https://parkpeople.ca/faites-un-don/?lang=fr" target="_blank">Faites un don</a>
                             </div>
     
                         </div>
@@ -74,7 +74,7 @@
     
                             </div>
                             <div class="column is-6">
-                                <a class="button" href="https://parkpeople.ca/donate-now" target="_blank">Faire un don</a>
+                                <a class="button" href="https://parkpeople.ca/faites-un-don/?lang=fr" target="_blank">Faites un don</a>
                             </div>
     
                         </div>
