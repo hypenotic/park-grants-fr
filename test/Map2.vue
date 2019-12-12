@@ -50,9 +50,9 @@
                 posts: [],
                 showLoader: false,
                 showList: false,
-                bluePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg',
-                orangePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg',
-                greenPin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg'
+                bluePin: 'https://parkpeople.ca/custom/uploads/2018/04/blue_marker_svg.svg',
+                orangePin: 'https://parkpeople.ca/custom/uploads/2018/04/orange_marker_svg.svg',
+                greenPin: 'https://parkpeople.ca/custom/uploads/2018/04/green_marker_small.svg'
             }
         },
         mounted() {
@@ -392,7 +392,7 @@
                         scaledSize: new google.maps.Size(25, 25)
                     };
 
-                    let here = 'https://parkpeople.ca/listings/custom/uploads/2018/04/pin_fr.svg';
+                    let here = 'https://parkpeople.ca/custom/uploads/2018/04/pin_fr.svg';
 
                     // Create a marker for each place.
                     var markerLabel = "YOU";
@@ -444,9 +444,9 @@
                 this.infoWindows = [];
 
                 // Icons
-                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
-                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
-                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
+                let blueMarker = 'https://parkpeople.ca/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/custom/uploads/2018/04/green_marker_small.svg';
 
                 /*
                     Iterate over all of the cafes
@@ -505,7 +505,7 @@
                         if (this.locations[i].timeframe == 'past') {
                             windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.locations[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
                         } else {
-                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
                         }
 
                         /*
@@ -589,9 +589,9 @@
                 let app = this;
 
                 // Icons
-                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
-                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
-                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
+                let blueMarker = 'https://parkpeople.ca/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/custom/uploads/2018/04/green_marker_small.svg';
 
                 let bounds = new google.maps.LatLngBounds();
 
@@ -654,7 +654,7 @@
                         if (this.activeMarkers[i].timeframe == 'past') {
                             windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.activeMarkers[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.activeMarkers[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.activeMarkers[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.activeMarkers[i].start_time+' - '+this.activeMarkers[i].end_time+'</p><span style="display:none;">'+this.activeMarkers[i].timeframe+'</span></div>';
                         } else {
-                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.activeMarkers[i].slug+ '&id='+ this.activeMarkers[i].id +'&tdgrant=true" target="_blank">'+ this.activeMarkers[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.activeMarkers[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.activeMarkers[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.activeMarkers[i].start_time+' - '+this.activeMarkers[i].end_time+'</p><span style="display:none;">'+this.activeMarkers[i].timeframe+'</span></div>';
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/events/?n='+ this.activeMarkers[i].slug+ '&id='+ this.activeMarkers[i].id +'&tdgrant=true" target="_blank">'+ this.activeMarkers[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.activeMarkers[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.activeMarkers[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.activeMarkers[i].start_time+' - '+this.activeMarkers[i].end_time+'</p><span style="display:none;">'+this.activeMarkers[i].timeframe+'</span></div>';
                         }
 
                         /*
@@ -717,9 +717,9 @@
                 this.infoWindows = [];
 
                 // Icons
-                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
-                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
-                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
+                let blueMarker = 'https://parkpeople.ca/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/custom/uploads/2018/04/green_marker_small.svg';
 
                 // let bounds = new google.maps.LatLngBounds();
 
@@ -782,7 +782,7 @@
                         if (this.locations[i].timeframe == 'past') {
                             windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.locations[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
                         } else {
-                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
                         }
 
                         /*
@@ -845,9 +845,9 @@
                 this.infoWindows = [];
 
                 // Icons
-                let blueMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg';
-                let orangeMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg';
-                let greenMarker = 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg';
+                let blueMarker = 'https://parkpeople.ca/custom/uploads/2018/04/blue_marker_svg.svg';
+                let orangeMarker = 'https://parkpeople.ca/custom/uploads/2018/04/orange_marker_svg.svg';
+                let greenMarker = 'https://parkpeople.ca/custom/uploads/2018/04/green_marker_small.svg';
 
                 /*
                     Iterate over all of the cafes
@@ -906,7 +906,7 @@
                         if (this.locations[i].timeframe == 'past') {
                             windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ this.locations[i].title + '</h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
                         } else {
-                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
+                            windowString = '<div style="width: 250px;">' + '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/events/?n='+ this.locations[i].slug+ '&id='+ this.locations[i].id +'&tdgrant=true" target="_blank">'+ this.locations[i].title +'</a></h6><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> '+  this.locations[i].listing[1] +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  this.locations[i].nice_start_date +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+this.locations[i].start_time+' - '+this.locations[i].end_time+'</p><span style="display:none;">'+this.locations[i].timeframe+'</span></div>';
                         }
 
                         /*

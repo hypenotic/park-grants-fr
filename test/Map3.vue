@@ -50,9 +50,9 @@
                 posts: [],
                 showLoader: false,
                 showList: false,
-                bluePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/blue_marker_svg.svg',
-                orangePin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/orange_marker_svg.svg',
-                greenPin: 'https://parkpeople.ca/listings/custom/uploads/2018/04/green_marker_small.svg'
+                bluePin: 'https://parkpeople.ca/custom/uploads/2018/04/blue_marker_svg.svg',
+                orangePin: 'https://parkpeople.ca/custom/uploads/2018/04/orange_marker_svg.svg',
+                greenPin: 'https://parkpeople.ca/custom/uploads/2018/04/green_marker_small.svg'
             }
         },
         mounted() {
@@ -360,7 +360,7 @@
                         scaledSize: new google.maps.Size(25, 25)
                     };
 
-                    let here = 'https://parkpeople.ca/listings/custom/uploads/2018/04/pin_fr.svg';
+                    let here = 'https://parkpeople.ca/custom/uploads/2018/04/pin_fr.svg';
 
                     // Create a marker for each place.
                     var markerLabel = "YOU";
@@ -493,9 +493,9 @@
                 if (timeframe =='past'){
                     header = '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ title + '</h6>';
                 } else {
-                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/listings/evenements/?lang=fr&n='+ slug + '&id='+ id +'&tdgrant=true" target="_blank">'+ title +'</a></h6>';
+                    header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="https://parkpeople.ca/evenements/?lang=fr&n='+ slug + '&id='+ id +'&tdgrant=true" target="_blank">'+ title +'</a></h6>';
                 }
-                return '<div style="width: 250px;">' + header +'<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> <a href="https://parkpeople.ca/listings/groupes/?lang=fr&n='+groupSlug+'&id='+groupID+'&tdgrant=true" target="_blank" style="font-weight: bold;">'+groupName+'</a></p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  startDate +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+startTime+' - '+endTime+'</p><span style="display:none;">'+timeframe+'</span><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-map-marker" aria-hidden="true"></i> '+address+'</p></div>';
+                return '<div style="width: 250px;">' + header +'<p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-users"></i> <a href="https://parkpeople.ca/groupes/?lang=fr&n='+groupSlug+'&id='+groupID+'&tdgrant=true" target="_blank" style="font-weight: bold;">'+groupName+'</a></p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-calendar-o" aria-hidden="true"></i> '+  startDate +'</p><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-clock-o" aria-hidden="true"></i> '+startTime+' - '+endTime+'</p><span style="display:none;">'+timeframe+'</span><p style="margin:0;font-size:12px;line-height: 1.5;"><i class="fa fa-map-marker" aria-hidden="true"></i> '+address+'</p></div>';
             },
             rebuildMarkers(){
                 let app = this;

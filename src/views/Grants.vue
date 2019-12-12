@@ -6,11 +6,10 @@
 				<div class="topContent" v-html="data.content.rendered"></div>
 			</div>
 		</section>
-
-		<section class="map-section">
+		<!-- <section class="map-section">
 			<h2>Activités TD Park People au Canada</h2>
 			<app-map></app-map>
-		</section>
+		</section> -->
 				
 		<section class="recipients">
 			<div class="align-center">
@@ -31,7 +30,7 @@
 
 		<section class="grant-illustration">
 			<div class="main-animation">
-				<img src="https://parkpeople.ca/listings/custom/uploads/2018/01/parkparadepeople_paradelayer.gif" alt="Parade animation">
+				<img src="https://parkpeople.ca/custom/uploads/2018/01/parkparadepeople_paradelayer.gif" alt="Parade animation">
 			</div>
 			<div class="clouds">
 			</div>
@@ -87,7 +86,7 @@
 	</div>
 	<div v-else class="loading-panel">
 		<div>
-			<img src="https://parkpeople.ca/listings/custom/uploads/2018/01/birdflying_pp_small.gif" alt="">
+			<img src="https://parkpeople.ca/custom/uploads/2018/01/birdflying_pp_small.gif" alt="">
 		</div>
 	</div>
 </template>
@@ -159,14 +158,14 @@ export default {
 	},
 	created() {
 		// console.log(store.state.count)
-		axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/pages/1829?_embed')
+		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/1829?_embed')
 		.then(response => {
             console.log(response.data)
 			this.data = response.data
 			axios.all([
-				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/case-study/?_embed&categories=134&per_page=15&lang=fr'),
-				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/research/?_embed&categories=134&per_page=15&lang=fr'),
-				axios.get('https://parkpeople.ca/listings/wp-json/wp/v2/resource/?_embed&categories=134&per_page=15&lang=fr')
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/case-study/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/research/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/resource/?_embed&categories=134&per_page=15&lang=fr')
 			])
 			.then(axios.spread((response, response1, response2) => {
 				// console.log(response.data)
