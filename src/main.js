@@ -34,7 +34,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
 	routes, // Have to pass an object where we setup the router. ES6 syntax (routes:routes)
 	mode: 'history', // Remove the hash
-	base: '/boursesdeparc',
+	base: '/boursesdeparc2018',
 	scrollBehavior (to, from, savedPosition) {
 		if (to.hash) {
 			console.log('HASH');
