@@ -135,7 +135,7 @@ nav#scrolling {
 		color: $white;
 		font-size: 30px;
 	}
-	@media #{$small-and-down} {
+	@media #{$medium-and-down} {
 		display: block;
 		position: fixed; 
 		right: 30px;
