@@ -6,6 +6,10 @@
 				<div class="topContent" v-html="data.content.rendered"></div>
 			</div>
 		</section>
+		<section class="map-section">
+			<h2>TD Park People Events Across Canada</h2>
+			<app-map></app-map>
+		</section>
 				
 		<section class="recipients">
 			<div class="align-center">
