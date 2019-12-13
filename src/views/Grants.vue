@@ -158,7 +158,7 @@ export default {
 	},
 	created() {
 		// console.log(store.state.count)
-		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/3246?_embed')
+		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/16210?_embed')
 		.then(response => {
             console.log(response.data)
 			this.data = response.data
