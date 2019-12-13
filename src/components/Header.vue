@@ -2,7 +2,7 @@
     <nav v-if="scrolled == true" id="scrolling" class="navbar green">
         <div class="navbar-brand">
             <div>
-                <a href="https://parkpeople.ca/boursesdeparc"><img src="https://parkpeople.ca/custom/uploads/2019/04/TD_logo_french_-white_nologos.png" class="grants-logo"></a>
+                <a href="https://parkpeople.ca/boursesdeparc2019"><img src="https://parkpeople.ca/custom/uploads/2019/04/TD_logo_french_-white_nologos.png" class="grants-logo"></a>
             </div>
         </div>
         <div class="lang">
@@ -24,7 +24,7 @@
     <nav v-else class="navbar green">
         <div class="navbar-brand">
             <div>
-                <a href="https://parkpeople.ca/boursesdeparc"><img src="https://parkpeople.ca/custom/uploads/2019/04/TD_logo_french_-white_nologos.png" class="grants-logo"></a>
+                <a href="https://parkpeople.ca/boursesdeparc2019"><img src="https://parkpeople.ca/custom/uploads/2019/04/TD_logo_french_-white_nologos.png" class="grants-logo"></a>
             </div>
         </div>
         <div class="lang">

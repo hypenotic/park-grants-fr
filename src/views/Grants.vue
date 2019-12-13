@@ -6,11 +6,6 @@
 				<div class="topContent" v-html="data.content.rendered"></div>
 			</div>
 		</section>
-
-		<section class="map-section">
-			<h2>Activités TD Park People au Canada</h2>
-			<app-map></app-map>
-		</section>
 				
 		<section class="recipients">
 			<div class="align-center">
@@ -159,7 +154,7 @@ export default {
 	},
 	created() {
 		// console.log(store.state.count)
-		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/16210?_embed')
+		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/3246?_embed')
 		.then(response => {
             console.log(response.data)
 			this.data = response.data
