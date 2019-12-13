@@ -6,7 +6,7 @@
 				<div class="topContent" v-html="data.content.rendered"></div>
 			</div>
 		</section>
-		<section class="application-eligibility container">
+		<!-- <section class="application-eligibility container">
 			<div class="application">
 				<h2>Processus de demande</h2>
 				<ol class="app-list">
@@ -28,7 +28,7 @@
 			<div class="container">
 				<div v-html="data.meta_box._page_grant_more_info"></div>
 			</div>
-		</section>
+		</section> -->
 				
 		<section class="recipients">
 			<div class="align-center">
@@ -147,7 +147,7 @@ export default {
 	},
 	created() {
 		// console.log(store.state.count)
-		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/3246?_embed')
+		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/16210?_embed')
 		.then(response => {
             console.log(response.data)
 			this.data = response.data
