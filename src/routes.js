@@ -2,6 +2,7 @@
 route*/
 import Grants from './views/Grants.vue';
 import Single from './views/Single.vue';
+import Faq from './views/Faq.vue';
 
 /* export a const names routes with will 
 hold my routes. Holding routes means it has 
