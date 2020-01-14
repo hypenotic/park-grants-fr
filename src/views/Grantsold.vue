@@ -1,32 +1,12 @@
 <template>
 	<div v-if="data != null">
-		<section class="videos">
-			<div class="overlay">
-				<h1>
-					Make something awesome happen in your park
-				</h1>
-				<a href="#learnmore" class="cta_button">
-					Learn more
-				</a>
-			</div>
-			<div class="hero" v-if="isMobile()">
-				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/374742599?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/374961083?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/374963755?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-			</div>
-			<div class="hero" v-else>
-				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/374742599?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/374961083?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/374963755?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-			</div>
-		</section>
 		<section class="section" v-if="data && data.hasOwnProperty('meta_box')">
 			<div class="container">
 				<h1 id="bird-anchor" v-html="data.meta_box._page_grant_heading"></h1>
 				<div class="topContent" v-html="data.content.rendered"></div>
 			</div>
 		</section>
-		<section class="application-eligibility container" id="learnmore">
+		<section class="application-eligibility container">
 			<div class="application">
 				<h2>Processus de demande</h2>
 				<ol class="app-list">
@@ -44,10 +24,26 @@
 				</ul>
 			</div>
 		</section>
-
-		<section class="recipients container">
+		<section class="more-info">
+			<div class="container">
+				<div v-html="data.meta_box._page_grant_more_info"></div>
+			</div>
+		</section>
+				
+		<section class="recipients">
 			<div class="align-center">
 				<router-link class="cta_button" :to="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></router-link>
+			</div>
+		</section>
+
+		<section class="event-templates">
+			<h3 v-html="data.meta_box._page_buckets_main_heading"></h3>
+			<div class="four-column wow fadeInUp">
+				<div v-for="bucket in data.meta_box._page_buckets" :key="bucket.bucket_copy">
+					<h4 v-html="bucket._page_bucket_heading"></h4>
+					<p v-html="bucket._page_bucket_copy"></p>
+					<a :href="bucket._page_bucket_link" @click="downloadArea(bucket._page_bucket_heading)">Télécharger fichier .zip</a>
+				</div>
 			</div>
 		</section>
 
@@ -59,37 +55,14 @@
 			</div>
 		</section>
 
-
-		<section class="more-info">
-			<div class="container">
-				<div v-html="data.meta_box._page_grant_more_info"></div>
-			</div>
-		</section>
-
-				
-		
-
-		<section class="event-templates container">
-			<h3 v-html="data.meta_box._page_buckets_main_heading"></h3>
-			<div class="four-column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s">
-				<div v-for="bucket in data.meta_box._page_buckets" :key="bucket.bucket_copy">
-					<h4 v-html="bucket._page_bucket_heading"></h4>
-					<p v-html="bucket._page_bucket_copy"></p>
-					<a :href="bucket._page_bucket_link" @click="downloadArea(bucket._page_bucket_heading)">Télécharger fichier .zip</a>
-				</div>
-			</div>
-		</section>
-
-		
-
-		<section class="grants-newsletter container">
+		<section class="grants-newsletter">
 			<div class="container">
 				<!-- <p>Want to stay up-to-date on Park People news?</p> -->
 				<a class="button" href="http://eepurl.com/dx3BWX" target="_blank">Recevez notre newsletter!</a>
 			</div>
 		</section>
-
-		<section class="grant-sponsors container">
+		
+		<section class="grant-sponsors">
 			<p>Rendu possible grâce à une formidable collaboration:</p>
 			<ul>
 				<li v-for="sponsor in data.meta_box._page_grant_sponsors" :key="sponsor['_page_g_sponsor_img']">
@@ -107,28 +80,36 @@
 	</div>
 </template>
 
+
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
+import Map from '../components/map/Map.vue';
 import RelatedList from '../components/related-resources/RelatedList.vue';
+import { mapState } from 'vuex'
+// import NewsletterForm from '../components/NewsletterForm.vue';
 export default {
 	components: {
+        appMap: Map,
 		appRelated: RelatedList
     },
-	props: ['name'],
 	data() {
 		return {
 			data: null,
 			relatedPosts: [],
 			errors: [],
 			loading: true,
-			selectedVideo: 0,
-			// videoLengths: [5,5,5],
-			videoLengths: [72,61,65],
-			time: 0
 		};
 	},
 	filters: {
+		translatedType(type){
+			if (type == 'resource') {
+				return 'ressource'
+			} else if ( type == 'research') {
+				return 'recherche'
+			} else {
+				return 'étude de cas'
+			}
+		},
 		removeHyphen(value){
 			return value.replace("-", ' ');
 		},
@@ -152,68 +133,47 @@ export default {
 			});
 		},
 	},
+	computed: {
+
+    },
 	methods: {
 		downloadArea(name) {
 			console.log('download event', name);
-			this.$ga.event('download', 'TD Grants Download', name, 1);
-		},
-		switchVideo(value){
-			this.selectedVideo = value
-		},
-		isMobile() {
-			return (navigator.userAgent.match(/Android/i)
- || navigator.userAgent.match(/webOS/i)
- || navigator.userAgent.match(/iPhone/i)
- || navigator.userAgent.match(/iPad/i)
- || navigator.userAgent.match(/iPod/i)
- || navigator.userAgent.match(/BlackBerry/i)
- || navigator.userAgent.match(/Windows Phone/i))
+			this.$ga.event('download', 'Bourses TD PP', name, 1);
 		}
 	},
-	created() {
-		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/16208?_embed')
-		.then(response => {
-			this.data = response.data;
-			
-			this.loading = false;
+	mounted() {
 
+	},
+	created() {
+		// console.log(store.state.count)
+		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/3246?_embed')
+		.then(response => {
+            console.log(response.data)
+			this.data = response.data
 			axios.all([
-				axios.get('https://parkpeople.ca/wp-json/wp/v2/case-study/?_embed&categories=133&per_page=20'),
-				axios.get('https://parkpeople.ca/wp-json/wp/v2/research/?_embed&categories=133&per_page=20'),
-				axios.get('https://parkpeople.ca/wp-json/wp/v2/resource/?_embed&categories=133&per_page=20')
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/case-study/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/research/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/resource/?_embed&categories=134&per_page=15&lang=fr')
 			])
 			.then(axios.spread((response, response1, response2) => {
 				// console.log(response.data)
 				let allPosts  = response.data.concat(response1.data, response2.data);
-				// console.log('old', allPosts)
+				console.log('old', allPosts)
 				allPosts.sort(function(a,b){
 					return new Date(b.date) - new Date(a.date)
 				})	
-				// console.log('sorted', allPosts)
+				console.log('sorted', allPosts)
 				this.relatedPosts = allPosts
 			}))
 			.catch(e => {
-				console.log(e)
 				this.errors.push(e)
 			})
 		})
 		.catch(e => {
-			console.log(e)
 			this.errors.push(e)
 		})
 	},
-	mounted(){
-		this.selectedVideo = Math.floor(Math.random()*3);
-		var ctx = this;
-		setInterval(function(){
-			ctx.time += 1;
-			ctx.time < 10 ? console.log(ctx.time) : "";
-			if(ctx.time == ctx.videoLengths[ctx.selectedVideo]){
-				console.log(ctx.selectedVideo);
-				ctx.selectedVideo = (ctx.selectedVideo + 1) % 3;
-			}
-		}, 1000);
-	}
 };
 </script>
 
