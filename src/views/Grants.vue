@@ -3,10 +3,10 @@
 		<section class="videos">
 			<div class="overlay">
 				<h1>
-					Make something awesome happen in your park
+					Accomplir des choses formidables dans nos parcs urbains
 				</h1>
 				<a href="#learnmore" class="cta_button">
-					Learn more
+					En savoir plus
 				</a>
 			</div>
 			<div class="hero" v-if="isMobile()">
