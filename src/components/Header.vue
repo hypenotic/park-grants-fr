@@ -16,8 +16,9 @@
         <div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{ 'menu-open': showMobileMenu }">
             <div class="navbar-end">
                 <a href="https://parkpeople.ca" class="navbar-item">Page d'accueil</a>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/recipiendaires-de-bourses'"><router-link to="/" exact>Bourses</router-link></span>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/recipiendaires-de-bourses"  exact>Récipiendaires de bourses</router-link></span>
+                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path != '/'"><router-link to="/" exact>Bourses</router-link></span>
+                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path != '/faq'"><router-link to="/faq" exact>FAQ</router-link></span>
+                <!-- <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/recipiendaires-de-bourses"  exact>Récipiendaires de bourses</router-link></span> -->
             </div>
         </div>
     </nav>
@@ -38,8 +39,8 @@
         <div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{ 'menu-open': showMobileMenu }">
             <div class="navbar-end">
                 <a href="https://parkpeople.ca" class="navbar-item">Page d'accueil</a>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/recipiendaires-de-bourses'"><router-link to="/" exact>Bourses</router-link></span>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/recipiendaires-de-bourses"  exact>Récipiendaires de bourses</router-link></span>
+                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path != '/'"><router-link to="/" exact>Bourses</router-link></span>
+                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path != '/faq'"><router-link to="/faq" exact>FAQ</router-link></span>
             </div>
         </div>
     </nav>
