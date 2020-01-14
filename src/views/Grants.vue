@@ -3,7 +3,7 @@
 		<section class="videos">
 			<div class="overlay">
 				<h1>
-					Accomplir des choses formidables dans nos parcs urbains
+					Faites de vos parcs des lieux exceptionnels.
 				</h1>
 				<a href="#learnmore" class="cta_button">
 					En savoir plus
