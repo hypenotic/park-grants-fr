@@ -179,9 +179,9 @@ export default {
 			this.loading = false;
 
 			axios.all([
-				axios.get('https://parkpeople.ca/wp-json/wp/v2/case-study/?_embed&categories=133&per_page=20'),
-				axios.get('https://parkpeople.ca/wp-json/wp/v2/research/?_embed&categories=133&per_page=20'),
-				axios.get('https://parkpeople.ca/wp-json/wp/v2/resource/?_embed&categories=133&per_page=20')
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/case-study/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/research/?_embed&categories=134&per_page=15&lang=fr'),
+				axios.get('https://parkpeople.ca/wp-json/wp/v2/resource/?_embed&categories=134&per_page=15&lang=fr')
 			])
 			.then(axios.spread((response, response1, response2) => {
 				// console.log(response.data)
