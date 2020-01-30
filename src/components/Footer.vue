@@ -7,7 +7,7 @@
                         <div class="columns is-centered">
                             <div class="column is-6">
                                 <p>Sponsor fondateur</p>
-                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2018/04/td_shield_logo_fr.png"></a>
+                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2020/01/TDReadyCommitment_LockupFR-e1580236829180.png"></a>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <div class="columns is-centered">
                             <div class="column is-6">
                                 <p>Sponsor fondateur</p>
-                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2018/04/td_shield_logo_fr.png"></a>
+                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2020/01/TDReadyCommitment_LockupFR-e1580236829180.png"></a>
                             </div>
                         </div>
                     </div>
