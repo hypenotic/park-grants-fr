@@ -95,6 +95,10 @@ export default {
 			relatedPosts: [],
 			errors: [],
 			loading: true,
+			selectedVideo: 0,
+			// videoLengths: [5,5,5],
+			videoLengths: [72,61,65],
+			time: 0
 		};
 	},
 	filters: {
@@ -137,6 +141,18 @@ export default {
 		downloadArea(name) {
 			console.log('download event', name);
 			this.$ga.event('download', 'Bourses TD PP', name, 1);
+		},
+		switchVideo(value){
+			this.selectedVideo = value
+		},
+		isMobile() {
+			return (navigator.userAgent.match(/Android/i)
+			|| navigator.userAgent.match(/webOS/i)
+			|| navigator.userAgent.match(/iPhone/i)
+			|| navigator.userAgent.match(/iPad/i)
+			|| navigator.userAgent.match(/iPod/i)
+			|| navigator.userAgent.match(/BlackBerry/i)
+			|| navigator.userAgent.match(/Windows Phone/i))
 		}
 	},
 	mounted() {
