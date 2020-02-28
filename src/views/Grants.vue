@@ -1,40 +1,37 @@
 <template>
 	<div v-if="data != null">
+		<section class="videos">
+			<div class="overlay">
+				<h1>
+					Faites de vos parcs des lieux exceptionnels.
+				</h1>
+				<router-link to="/grant-recipients" class="cta_button" exact>
+					Récipiendaires de bourses
+				</router-link>
+			</div>
+			<div class="hero" v-if="isMobile()">
+				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/374742599?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/374961083?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/374963755?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+			</div>
+			<div class="hero" v-else>
+				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/374742599?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/374961083?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/374963755?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+			</div>
+		</section>
 		<section class="section" v-if="data && data.hasOwnProperty('meta_box')">
 			<div class="container">
 				<h1 id="bird-anchor" v-html="data.meta_box._page_grant_heading"></h1>
 				<div class="topContent" v-html="data.content.rendered"></div>
 			</div>
 		</section>
-		<!-- <section class="application-eligibility container">
-			<div class="application">
-				<h2>Processus de demande</h2>
-				<ol class="app-list">
-					<li v-for="point in data.meta_box._page_app_process" :key="point['_page_application_copy']" v-html="point['_page_application_copy']">
-					</li>
-				</ol>
-			</div>
-			<div class="eligibility">
-				<h2>Admissibilité</h2>
-				<ul>
-					<li v-for="point in data.meta_box._page_eligibility" :key="point['_page_eligibility_copy']">
-						<img :src="point['_page_eligibility_img']" alt="">
-						<span v-html="point['_page_eligibility_copy']"></span>
-					</li>
-				</ul>
-			</div>
-		</section>
-		<section class="more-info">
-			<div class="container">
-				<div v-html="data.meta_box._page_grant_more_info"></div>
-			</div>
-		</section> -->
 				
-		<section class="recipients">
+		<!-- <section class="recipients">
 			<div class="align-center">
 				<router-link class="cta_button" :to="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></router-link>
 			</div>
-		</section>
+		</section> -->
 
 		<section class="event-templates">
 			<h3 v-html="data.meta_box._page_buckets_main_heading"></h3>
