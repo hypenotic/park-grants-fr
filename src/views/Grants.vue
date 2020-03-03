@@ -5,7 +5,7 @@
 				<h1>
 					Faites de vos parcs des lieux exceptionnels.
 				</h1>
-				<router-link to="/grant-recipients" class="cta_button" exact>
+				<router-link to="/recipiendaires-de-bourses" class="cta_button" exact>
 					Récipiendaires de bourses
 				</router-link>
 			</div>

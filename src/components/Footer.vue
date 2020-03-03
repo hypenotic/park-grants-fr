@@ -15,7 +15,7 @@
                         <div class="columns">
                             <div class="column is-6">
                                 <ul>
-                                    <li style="color: white;font-weight: bold;">Park People</li>
+                                    <li style="color: white;font-weight: bold;">Amis des parcs</li>
                                     <li>401, rue Richmond Ouest</li>
                                     <li>Studio 119, laboratoire de City Builder</li>
                                     <li>Toronto, ON M5V 3A8</li>
