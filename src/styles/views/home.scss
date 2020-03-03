@@ -572,8 +572,8 @@ h1 {
 		top: 100px;
 		left: -120px;
 		-moz-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
+		-o-transform: scaleX(-1);
+		-webkit-transform: scaleX(-1);
 	}
 	@media #{$xlarge-and-up} {
         &:before {
