@@ -7,7 +7,7 @@
                         <div class="columns is-centered">
                             <div class="column is-6">
                                 <p>Sponsor fondateur</p>
-                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2018/04/td_shield_logo_fr.png"></a>
+                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2020/01/TDReadyCommitment_LockupFR-e1580236829180.png"></a>
                             </div>
                         </div>
                     </div>
@@ -15,7 +15,7 @@
                         <div class="columns">
                             <div class="column is-6">
                                 <ul>
-                                    <li style="color: white;font-weight: bold;">Park People</li>
+                                    <li style="color: white;font-weight: bold;">Amis des parc</li>
                                     <li>401, rue Richmond Ouest</li>
                                     <li>Studio 119, laboratoire de City Builder</li>
                                     <li>Toronto, ON M5V 3A8</li>
@@ -48,7 +48,7 @@
                         <div class="columns is-centered">
                             <div class="column is-6">
                                 <p>Sponsor fondateur</p>
-                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2018/04/td_shield_logo_fr.png"></a>
+                                <a href="https://www.td.com/francais/responsabilites-de-lentreprise/la-promesse-prets-a-agir/index.jsp" target="_blank"><img src="https://parkpeople.ca/custom/uploads/2020/01/TDReadyCommitment_LockupFR-e1580236829180.png"></a>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         <div class="columns">
                             <div class="column is-6">
                                 <ul>
-                                    <li style="color: white;font-weight: bold;">Park People</li>
+                                    <li style="color: white;font-weight: bold;">Amis des parc</li>
                                     <li>401, rue Richmond Ouest</li>
                                     <li>Studio 119, laboratoire de City Builder</li>
                                     <li>Toronto, ON M5V 3A8</li>

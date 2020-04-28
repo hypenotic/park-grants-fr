@@ -1,5 +1,27 @@
 <template>
 	<div v-if="data != null">
+
+		<section class="videos">
+			<div class="overlay">
+				<h1>
+					Faites de vos parcs des lieux exceptionnels.
+				</h1>
+				<a href="#learnmore" class="cta_button">
+					En savoir plus
+				</a>
+			</div>
+			<div class="hero" v-if="isMobile()">
+				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/374742599?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/374961083?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/374963755?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+			</div>
+			<div class="hero" v-else>
+				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/374742599?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/374961083?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/374963755?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+			</div>
+		</section>
+
 		<section class="section" v-if="data && data.hasOwnProperty('meta_box')">
 			<div class="container">
 				<h1 id="bird-anchor" v-html="data.meta_box._page_grant_heading"></h1>
@@ -109,6 +131,10 @@ export default {
 			relatedPosts: [],
 			errors: [],
 			loading: true,
+			selectedVideo: 0,
+			// videoLengths: [5,5,5],
+			videoLengths: [72,61,65],
+			time: 0
 		};
 	},
 	filters: {
@@ -151,10 +177,28 @@ export default {
 		downloadArea(name) {
 			console.log('download event', name);
 			this.$ga.event('download', 'Bourses TD PP', name, 1);
+		},
+		isMobile() {
+			return (navigator.userAgent.match(/Android/i)
+			|| navigator.userAgent.match(/webOS/i)
+			|| navigator.userAgent.match(/iPhone/i)
+			|| navigator.userAgent.match(/iPad/i)
+			|| navigator.userAgent.match(/iPod/i)
+			|| navigator.userAgent.match(/BlackBerry/i)
+			|| navigator.userAgent.match(/Windows Phone/i))
 		}
 	},
-	mounted() {
-
+	mounted(){
+		this.selectedVideo = Math.floor(Math.random()*3);
+		var ctx = this;
+		setInterval(function(){
+			ctx.time += 1;
+			ctx.time < 10 ? console.log(ctx.time) : "";
+			if(ctx.time == ctx.videoLengths[ctx.selectedVideo]){
+				console.log(ctx.selectedVideo);
+				ctx.selectedVideo = (ctx.selectedVideo + 1) % 3;
+			}
+		}, 1000);
 	},
 	created() {
 		// console.log(store.state.count)
