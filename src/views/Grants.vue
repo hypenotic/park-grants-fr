@@ -54,8 +54,8 @@
 			<div class="main-animation">
 				<img src="https://parkpeople.ca/custom/uploads/2020/04/TD_PPgrants_isolation_webart.jpg" alt="Illustration">
 			</div>
-			<div class="clouds">
-			</div>
+			<!-- <div class="clouds">
+			</div> -->
 		</section>
 
 		<section class="grants-newsletter">
@@ -202,7 +202,7 @@ export default {
 	},
 	created() {
 		// console.log(store.state.count)
-		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/16210?_embed')
+		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/17551?_embed')
 		.then(response => {
             console.log(response.data)
 			this.data = response.data
