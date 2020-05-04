@@ -6,9 +6,7 @@
 				<h1>
 					Faites de vos parcs des lieux exceptionnels.
 				</h1>
-				<a href="#learnmore" class="cta_button">
-					En savoir plus
-				</a>
+				<router-link v-if="data.meta_box._page_grant_cta_text" class="cta_button" :to="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></router-link>
 			</div>
 			<div class="hero" v-if="isMobile()">
 				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/374742599?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
@@ -29,11 +27,11 @@
 			</div>
 		</section>
 		<section class="map-section">
-			<h2>TD Park People Events Across Canada</h2>
+			<h2>Activités TD Park People au Canada</h2>
 			<app-map></app-map>
 		</section>
 				
-		<section class="recipients">
+		<section v-if="data.meta_box._page_grant_cta_text" class="recipients">
 			<div class="align-center">
 				<router-link class="cta_button" :to="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></router-link>
 			</div>
