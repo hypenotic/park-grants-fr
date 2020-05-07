@@ -35,13 +35,13 @@
         <div id="mobile-menu-trigger" v-on:click="showMobileMenu = !showMobileMenu">
             <i class="fa fa-bars" aria-hidden="true"></i>
         </div>
-        <!-- <div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{ 'menu-open': showMobileMenu }">
+        <div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{ 'menu-open': showMobileMenu }">
             <div class="navbar-end">
                 <a href="https://parkpeople.ca" class="navbar-item">Page d'accueil</a>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/recipiendaires-de-bourses'"><router-link to="/" exact>Bourses</router-link></span>
-                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/recipiendaires-de-bourses"  exact>Récipiendaires de bourses</router-link></span>
+                <!-- <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/recipiendaires-de-bourses'"><router-link to="/" exact>Bourses</router-link></span>
+                <span class="navbar-item" v-on:click="showMobileMenu = !showMobileMenu" v-if="this.$route.path == '/'"><router-link to="/recipiendaires-de-bourses"  exact>Récipiendaires de bourses</router-link></span> -->
             </div>
-        </div> -->
+        </div>
     </nav>
 </template>
 
