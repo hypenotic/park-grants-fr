@@ -27,7 +27,7 @@
 			</div>
 		</section>
 		<section class="map-section">
-			<h2>Activités TD Park People au Canada</h2>
+			<h2>Activités TD Amis des parcs au Canada</h2>
 			<app-map></app-map>
 		</section>
 				
