@@ -1,5 +1,25 @@
 <template>
 	<div v-if="data != null">
+
+		<section class="videos">
+			<div class="overlay">
+				<h1>
+					Activons le pouvoir des parcs
+				</h1>
+				<router-link v-if="data.meta_box._page_grant_cta_text" class="cta_button" :to="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></router-link>
+			</div>
+			<div class="hero" v-if="isMobile()">
+				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/383530025?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/383530166?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/383357365?background=1&loop=1&autoplay=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+			</div>
+			<div class="hero" v-else>
+				<iframe v-if="selectedVideo == 0" src="https://player.vimeo.com/video/383530025?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 1" src="https://player.vimeo.com/video/383530166?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+				<iframe v-if="selectedVideo == 2" src="https://player.vimeo.com/video/383357365?background=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+			</div>
+		</section>
+
 		<section class="section" v-if="data && data.hasOwnProperty('meta_box')">
 			<div class="container">
 				<h1 id="bird-anchor" v-html="data.meta_box._page_grant_heading"></h1>
@@ -7,11 +27,11 @@
 			</div>
 		</section>
 		<section class="map-section">
-			<h2>TD Park People Events Across Canada</h2>
+			<h2>Activités TD Amis des parcs au Canada</h2>
 			<app-map></app-map>
 		</section>
 				
-		<section class="recipients">
+		<section v-if="data.meta_box._page_grant_cta_text" class="recipients">
 			<div class="align-center">
 				<router-link class="cta_button" :to="data.meta_box._page_grant_cta_link" v-html="data.meta_box._page_grant_cta_text"></router-link>
 			</div>
@@ -29,11 +49,11 @@
 		</section>
 
 		<section class="grant-illustration">
-			<div class="main-animation">
-				<img src="https://parkpeople.ca/custom/uploads/2018/01/parkparadepeople_paradelayer.gif" alt="Parade animation">
-			</div>
-			<div class="clouds">
-			</div>
+			<img src="https://parkpeople.ca/custom/uploads/2020/04/TD_PPgrants_isolation_webart.jpg" alt="Illustration">
+			<!-- <div class="main-animation">
+			</div> -->
+			<!-- <div class="clouds">
+			</div> -->
 		</section>
 
 		<section class="grants-newsletter">
@@ -109,6 +129,10 @@ export default {
 			relatedPosts: [],
 			errors: [],
 			loading: true,
+			selectedVideo: 0,
+			// videoLengths: [5,5,5],
+			videoLengths: [72,61,65],
+			time: 0
 		};
 	},
 	filters: {
@@ -151,14 +175,32 @@ export default {
 		downloadArea(name) {
 			console.log('download event', name);
 			this.$ga.event('download', 'Bourses TD PP', name, 1);
+		},
+		isMobile() {
+			return (navigator.userAgent.match(/Android/i)
+			|| navigator.userAgent.match(/webOS/i)
+			|| navigator.userAgent.match(/iPhone/i)
+			|| navigator.userAgent.match(/iPad/i)
+			|| navigator.userAgent.match(/iPod/i)
+			|| navigator.userAgent.match(/BlackBerry/i)
+			|| navigator.userAgent.match(/Windows Phone/i))
 		}
 	},
-	mounted() {
-
+	mounted(){
+		this.selectedVideo = Math.floor(Math.random()*3);
+		var ctx = this;
+		setInterval(function(){
+			ctx.time += 1;
+			ctx.time < 10 ? console.log(ctx.time) : "";
+			if(ctx.time == ctx.videoLengths[ctx.selectedVideo]){
+				console.log(ctx.selectedVideo);
+				ctx.selectedVideo = (ctx.selectedVideo + 1) % 3;
+			}
+		}, 1000);
 	},
 	created() {
 		// console.log(store.state.count)
-		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/16210?_embed')
+		axios.get('https://parkpeople.ca/wp-json/wp/v2/pages/17551?_embed')
 		.then(response => {
             console.log(response.data)
 			this.data = response.data
