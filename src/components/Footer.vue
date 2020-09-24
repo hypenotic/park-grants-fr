@@ -185,7 +185,7 @@ footer.footer-grants {
 }
 
 footer >div >div >div {
-    padding-top: 80px;
+    padding-top: 120px;
     padding-left: 40px;
     padding-right: 40px;
     @media #{$medium-and-up} {
