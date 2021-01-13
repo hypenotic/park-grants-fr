@@ -2,7 +2,9 @@
   <div v-if="data != null">
     <section class="videos">
       <div class="overlay">
-        <h1>Faites de vos parcs des lieux exceptionnels.</h1>
+        <h1>
+          Les Bourses d'hiver TD Amis des parcs: Rendre l'hiver plus chaleureux
+        </h1>
         <a href="#learnmore" class="cta_button"> En savoir plus </a>
       </div>
       <div class="hero" v-if="isMobile()">
