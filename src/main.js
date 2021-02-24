@@ -1,15 +1,14 @@
-import Vue from 'vue'
+import Vue from "vue";
 // import Vuex from 'vuex'
-import store from './store'
-import App from './App.vue'
+import store from "./store";
+import App from "./App.vue";
 // After install add Vue Router to our main app
-import VueRouter from 'vue-router'
-import VueAnalytics from 'vue-analytics'
-import { routes } from './routes'
-import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
+import VueRouter from "vue-router";
+import VueAnalytics from "vue-analytics";
+import { routes } from "./routes";
+import Buefy from "buefy";
+import "buefy/dist/buefy.css";
 // import VuePaginate from 'vue-paginate'
-
 
 export const eventBus = new Vue();
 
@@ -27,49 +26,48 @@ Vue.use(VueRouter);
 //     resourceList: []
 //   },
 //   mutations: {
-    
+
 //   }
 // })
 
 const router = new VueRouter({
-	routes, // Have to pass an object where we setup the router. ES6 syntax (routes:routes)
-	mode: 'history', // Remove the hash
-	base: '/boursesdeparc',
-	scrollBehavior (to, from, savedPosition) {
-		if (to.hash) {
-			console.log('HASH');
-			return {
-			  selector: to.hash
-			  , offset: { x: 0, y: 100 }
-			}
-		} else {
-			return { x: 0, y: 0 }
-		}
-	}
-//   scrollBehavior (to, from, savedPosition) {
-//       return { x: 0, y: 0 }
-//     }
-})
-
-Vue.use(VueAnalytics, {
-	id: 'UA-73699301-1',
-	// commands: {
-	// 	trackClick (name = 'unknown') {
-	// 	   $ga.track('Social Link', 'click', 'Social Account', name)
-	// 	}
-	// }
-	// debug: {
-	// 	enabled: true,
-	// 	trace: false,
-	// 	sendHitTask: true
-	// },
-	router
+  routes, // Have to pass an object where we setup the router. ES6 syntax (routes:routes)
+  mode: "history", // Remove the hash
+  base: "/boursesdeparc",
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      console.log("HASH");
+      return {
+        selector: to.hash,
+        offset: { x: 0, y: 100 },
+      };
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
+  //   scrollBehavior (to, from, savedPosition) {
+  //       return { x: 0, y: 0 }
+  //     }
 });
 
+Vue.use(VueAnalytics, {
+  id: "UA-73699301-1",
+  // commands: {
+  // 	trackClick (name = 'unknown') {
+  // 	   $ga.track('Social Link', 'click', 'Social Account', name)
+  // 	}
+  // }
+  // debug: {
+  // 	enabled: true,
+  // 	trace: false,
+  // 	sendHitTask: true
+  // },
+  router,
+});
 
 new Vue({
-  el: '#app',
+  el: "#app",
   router,
   store,
-  render: h => h(App)
-})
+  render: (h) => h(App),
+});
