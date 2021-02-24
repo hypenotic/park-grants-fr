@@ -222,7 +222,7 @@ export default {
   created() {
     // console.log(store.state.count)
     axios
-      .get("https://parkpeople.ca/wp-json/wp/v2/pages/17551?_embed")
+      .get("https://parkpeople.ca/wp-json/wp/v2/pages/21012?_embed")
       .then((response) => {
         console.log(response.data);
         this.data = response.data;
