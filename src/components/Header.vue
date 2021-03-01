@@ -93,7 +93,7 @@
           v-on:click="showMobileMenu = !showMobileMenu"
           v-if="this.$route.path == '/'"
           ><router-link to="/recipiendaires-de-bourses" exact
-            >Récipiendaires de bourses</router-link
+            >Récipiendaires de bourses d'hiver</router-link
           ></span
         >
       </div>
