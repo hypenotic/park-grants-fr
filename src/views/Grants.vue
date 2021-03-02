@@ -2,7 +2,7 @@
   <div v-if="data != null">
     <section class="videos">
       <div class="overlay">
-        <h1>Faites de vos parcs des lieux exceptionnels.</h1>
+        <h1>Soutenir des liens essentiels entre les citoyens et les parcs</h1>
         <!-- <router-link to="/recipiendaires-de-bourses" class="cta_button" exact>
           Récipiendaires de bourses
         </router-link> -->
