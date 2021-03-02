@@ -1,20 +1,23 @@
-import Vue from "vue";
+import Vue from 'vue'
 // import Vuex from 'vuex'
-import store from "./store";
-import App from "./App.vue";
+import store from './store'
+import App from './App.vue'
 // After install add Vue Router to our main app
-import VueRouter from "vue-router";
-import VueAnalytics from "vue-analytics";
-import { routes } from "./routes";
-import Buefy from "buefy";
-import "buefy/dist/buefy.css";
-// import VuePaginate from 'vue-paginate'
+import VueRouter from 'vue-router'
+import VueAnalytics from 'vue-analytics'
+import { routes } from './routes'
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
+var SocialSharing = require('vue-social-sharing');
+import VuePaginate from 'vue-paginate'
+
 
 export const eventBus = new Vue();
 
 // Use
 Vue.use(Buefy);
-// Vue.use(VuePaginate)
+Vue.use(SocialSharing);
+Vue.use(VuePaginate)
 // Vue.use(Vuex);
 
 /* With the Vue Router imported 
@@ -26,7 +29,7 @@ Vue.use(VueRouter);
 //     resourceList: []
 //   },
 //   mutations: {
-
+    
 //   }
 // })
 
