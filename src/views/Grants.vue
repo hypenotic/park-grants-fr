@@ -260,7 +260,7 @@ export default {
   },
   created() {
     axios
-      .get("https://parkpeople.ca/wp-json/wp/v2/pages/17551?_embed")
+      .get("https://parkpeople.ca/wp-json/wp/v2/pages/22155?_embed")
       .then(response => {
         this.data = response.data;
         axios
