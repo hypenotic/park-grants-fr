@@ -3,7 +3,7 @@
     <section class="videos">
       <div class="overlay">
         <h1>
-          Activons le pouvoir des parcs
+          Soutenir des liens essentiels entre les citoyens et les parcs
         </h1>
         <router-link
           v-if="data.meta_box._page_grant_cta_text"
